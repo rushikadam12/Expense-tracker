@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const mongoose=require('mongoose')
 
-const pass=encodeURIComponent("rushi@123")
 const connectDb=async()=>{
     try{
             await mongoose.connect(process.env.URI)
