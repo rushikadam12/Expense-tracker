@@ -1,8 +1,10 @@
-const mongoose = require("mongoose");
 require('../DB/db')
+const mongoose = require("mongoose");
 const User = require('../DB/register')
 const express = require("express");
 const router = express.Router();
+const Hpassword=require('../login/HashPass')
+
 router.post("/", async (req, res) => {
   const { username, email, password, budget } = req.body;
   console.log(req.body);
@@ -12,23 +14,21 @@ router.post("/", async (req, res) => {
       return res.json({ error: "pls enter your all fields" });
     }
 
-    const existingUser = await User.findOne({ email: email })
+    const existingUser = await User.findOne({ email: email })//search for email in database
     if (existingUser) {
       return res.status(422).json({ error: "email already present" });
     }
-    const user = new User({ username, email, password, budget })
+
+    const hpass=await Hpassword(password);//function for convert into hash format
+    const user =new User({ username, email, password:hpass, budget })//add the data
+
     const resp = await user.save();
-    res.send({ message: "Data added successfully", resp: resp });
+    res.status(200).send({ message: "Data added successfully", resp: resp });
     console.log("data added");
-    //.then(()=>{
-    //     res.status(200).json({message:'data added successfully'})
-    // }).catch((err)=>{
-    //     console.log(error)
-    //     res.status(500).json({error:err})
-    // })
+  
   } catch (error) {
     console.log(error);
-    res.send({ error: error });
+    res.status(500).send({ error: error });
   }
 });
 module.exports = router;
