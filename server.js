@@ -1,12 +1,15 @@
 require('dotenv').config();
 const express=require('express');
 const connectDb=require('./app/DB/db.js')
-const exp=require('./app/DB/exp.js')
 const bodyParser=require('body-parser')
 const cors=require('cors')
 const Register=require('./app/login/Register.js')
 const Login=require('./app/login/Login.js')
 const session=require('express-session')
+const addExpense=require('./app/Expense/addExpense.js')
+const ByDate=require('./app/Sort/ByDate.js')
+const auth=require('./app/authentication/authentication.js')
+
 app=express();
 app.use(express.json())
 app.use(bodyParser.json())
@@ -28,8 +31,10 @@ app.use(session({
 
 
 app.use("/api/Register",Register)
+app.use("/api/Auth",auth)
 app.use("/api/Login",Login)
-
+app.use("/api/AddExpense",addExpense)
+app.use("/api/Expenses",ByDate)
 
 connectDb().then(()=>{
 app.listen(process.env.PORT||3000,()=>{

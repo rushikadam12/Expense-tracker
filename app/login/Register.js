@@ -1,5 +1,4 @@
 require('../DB/db')
-const mongoose = require("mongoose");
 const User = require('../DB/register')
 const express = require("express");
 const router = express.Router();
