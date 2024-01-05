@@ -1,2 +1,3 @@
 #ENV file
 /.env
+/.package.json
