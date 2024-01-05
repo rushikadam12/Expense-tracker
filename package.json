@@ -14,6 +14,7 @@
     "array-flatten": "^1.1.1",
     "balanced-match": "^1.0.2",
     "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "binary-extensions": "^2.2.0",
     "body-parser": "^1.20.2",
     "brace-expansion": "^1.1.11",
@@ -147,8 +148,8 @@
     "simple-update-notifier": "^2.0.0",
     "sparse-bitfield": "^3.0.3",
     "statuses": "^2.0.1",
-    "string-width": "^4.2.3",
     "string_decoder": "^1.3.0",
+    "string-width": "^4.2.3",
     "strip-ansi": "^6.0.1",
     "supports-color": "^5.5.0",
     "tar": "^6.2.0",
@@ -170,13 +171,11 @@
     "wrappy": "^1.0.2",
     "yallist": "^4.0.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev":"node index.js",
-    "start":"node index.js",
-    "build":"npm install --force"
-
+    "dev": "node index.js",
+    "start": "node index.js",
+    "build": "npm install --force"
   },
   "author": "",
   "license": "ISC"

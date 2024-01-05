@@ -2,7 +2,7 @@ require('../DB/db')
 const express=require('express')
 const router=express.Router()
 const jwt=require('jsonwebtoken')
-const bcrypt=require('bcrypt')
+const bcrypt=require('bcryptjs')
 const User=require('../DB/register')
 //const verifyToken=require('../middleware/VerifyToken')
 router.get('/',async(req,res)=>{
