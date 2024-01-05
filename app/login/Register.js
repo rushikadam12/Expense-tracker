@@ -6,7 +6,7 @@ const Hpassword=require('../login/HashPass')
 
 router.post("/", async (req, res) => {
   const { username, email, password, budget } = req.body;
-  console.log(req.body);
+  //console.log(req.body);
   try {
     if (!username || !email || !budget || !password) {
       console.log("you visited post request");
