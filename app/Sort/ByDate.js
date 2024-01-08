@@ -1,8 +1,7 @@
 const express=require('express')
 const router = express.Router();
-const verifyToken=require('../middleware/VerifyToken')
 const Expense=require('../models/ExpenseModel')
-router.get("/:sortField/:sortOrder",verifyToken,async(req,res)=>{
+router.get("/:sortField/:sortOrder",async(req,res)=>{
     const {sortField,sortOrder}=req.params;
     if(!sortField||!sortOrder){
         return res.status(501).send('pls enter params')

@@ -16,7 +16,7 @@ router.get('/',async(req,res)=>{
         bcrypt.compare(password,user.password,(err,result)=>{
              if(result){
                 //res.status(201).json({password:result})
-                const token=jwt.sign({id:user._id},process.env.SECURE_KEY,{expiresIn:"1h"})
+                const token=jwt.sign({id:user._id},process.env.SECURE_KEY,{expiresIn:"1d"})
                 req.session.user=user._id
                 if(token){
                     return res.send({token:token,status:"ok"})
@@ -24,7 +24,7 @@ router.get('/',async(req,res)=>{
 
                 // console.log(result)
             }else{
-                res.send({password:result,message:'pls enter correct password'})
+                res.send({password:result,message:'Invalid credentials'})
                 // console.log(result)
             }
         })

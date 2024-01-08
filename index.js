@@ -9,6 +9,9 @@ const session=require('express-session')
 const addExpense=require('./app/Expense/addExpense.js')
 const ByDate=require('./app/Sort/ByDate.js')
 const auth=require('./app/authentication/authentication.js')
+const UserData=require('./app/login/UserData.js')
+const verifyToken=require('./app/middleware/VerifyToken.js')
+const deleteExpense=require('./app/Expense/deleteExpense.js')
 
 app=express();
 app.use(express.json())
@@ -33,8 +36,10 @@ app.use(session({
 app.use("/api/Register",Register)
 app.use("/api/Auth",auth)
 app.use("/api/Login",Login)
-app.use("/api/AddExpense",addExpense)
-app.use("/api/Expenses",ByDate)
+app.use("/api/AddExpense",verifyToken,addExpense)
+app.use("/api/Expenses",verifyToken,ByDate)
+app.use("/api",verifyToken,UserData)
+app.use("/api/Delete",verifyToken,deleteExpense)
 
 connectDb().then(()=>{
 app.listen(process.env.PORT||3000,()=>{
