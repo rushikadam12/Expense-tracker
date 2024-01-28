@@ -1,34 +1,80 @@
 import React from "react";
 import img from "../assets/images";
+import { FaUser } from "react-icons/fa";
+import { FaLock } from "react-icons/fa";
+import { GiMoneyStack } from "react-icons/gi";
+import { Link } from "react-router-dom";
+import { MdEmail } from "react-icons/md";
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function Signup() {
+  const notify = () => toast("👍🏼 form submit!", {
+    position: "top-right",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "dark"});
   return (
     <>
-      <div className="w-full min-h-screen bg-[#A6BBDF] px-12 py-5 flex flex-row items-center justify-center flex-wrap">
-        <div className="border-2 w-[40%] min-h-[50vh] bg-slate-500 flex justify-center">
-          <img src={img[0].url} width={500} className="self-center" />
-        </div>
-        <div className="flex flex-col justify-center item-center border-2 w-[40%] min-h-[53vh] border-2 py-5 px-2 gap-1">
-          <h2 className="text-xl ">Welcome to myExpense</h2>
-          <div className="flex content-center justify-center items-center flex-col w-[50%] gap-[1rem] self-center">
-            <label className="self-start font-semibold">User name</label>
-            <p className="self-center  w-full">
-              
-              <input
-                type="text"
-                className=" px-2 py-2 font-semibold  w-full rounded-sm border-none outline-none"
-              />
-            </p>
-            <label className="self-start font-semibold">User name</label>
-            <p className="self-center  w-full">
-              <input type="email" className=" px-2 py-2 font-semibold border-2 w-full rounded-sm border-none" />
-            </p>
-            <label className="self-start font-semibold">User name</label>
-            <p className="self-center  w-full">
-              <input type="password" className="px-2 py-2 font-semibold border-2 w-full rounded-sm border-none" />
-            </p>
-            <label className="self-start font-semibold">User name</label>
-            <p className="self-center  w-full">
-              <input type="number" className="px-2 py-2 font-semibold border-2 w-full rounded-sm border-none " />
+      <div className="  md:w-full w-[100%] min-h-screen  md:px-12 md:py-5 px-5 py-5 flex flex-col md:flex-row items-center justify-center flex-wrap">
+
+        <div className="glass md:min-w-[50%] flex justify-center md:flex-row flex-col items-center  px-5 py-5 gap-[1rem] shadow-2xl rounded-xl animate-fade-up animate-ease-out">
+          
+          <img
+            src={img[0].url}
+            width={500}
+            loading="lazy"
+            className="self-start"
+          />
+        
+          
+          <div className="h-fit md:px-4 md:py-5 px-2 py-2 flex md:flex-col flex-col gap-[0.5rem] shadow-2xl w-full ">
+            <p className="text-2xl px-2 py-2 break-words font-semibold text-center">Welcome to myExpense </p>
+            <label className="flex px-1 gap-1 md:text-lg">
+              <FaUser size={24} />
+              Username:
+            </label>
+            <input
+              className="px-2 py-1 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent font-semibold " type="text"
+              required
+            />
+            <label className="flex gap-1 px-1 md:text-lg">
+              <FaLock size={23} />
+              Email:
+            </label>
+            <input className="px-2 py-1 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent required" type="email"/>
+            <label className="flex gap-1 px-1 md:text-lg">
+              <MdEmail size={25} />
+              Password:
+            </label>
+            <input
+              className="px-2 py-1 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent "
+              type='password'
+              required
+            />
+            <label className="flex gap-1 px-1 md:text-lg">
+              <GiMoneyStack size={25} />
+              Budget:
+            </label>
+            <input
+              className="px-1 py-2 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent "
+              required type='number'
+            />
+            <button
+              className="text-slate-800 mt-1 px-2 py-2 bg-[#60C5EE] rounded-lg hover:bg-[#7edaff] md:text-xl text-center font-semibold"
+              type="submit"  onClick={notify} 
+            >
+              SignUp
+            </button>
+            <p>
+              already SignUp?
+              <Link className="text-blue-500 px-1" to="/login">
+                Go to Login page
+              </Link>
             </p>
           </div>
         </div>

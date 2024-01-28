@@ -1,11 +1,22 @@
 /** @type {import('tailwindcss').Config} */
+import daisyui from 'daisyui'
+import tailwindcssanimated from 'tailwindcss-animated'
+
 export default {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+      customFont: ['"Open Sans"', "sans-serif"],
+      // Add more custom font families as needed
+    },},
+  
   },
-  plugins: [],
+  daisyui: {
+    themes: ["light", "dark", "cupcake","forest","dracula","synthwave","luxury","night"],
+  },
+  plugins: [daisyui,tailwindcssanimated],
 }
