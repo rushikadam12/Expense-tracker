@@ -1,8 +1,48 @@
 import React from "react";
-import { FcBusinessman } from "react-icons/fc";
-import AreaChart from "./Chart";
+import useNotify from "../hooks/useNotify";
+import {
+  useQuery,
+  
+} from '@tanstack/react-query'
+import axios from 'axios'
 function UserInfo() {
-  const tim = true;
+
+  const User=async()=>{
+    try{
+      const response=await axios.get('http://localhost:5122/api/User',{
+        headers:{
+        "x-access-token":localStorage.getItem('token')
+        },
+      });
+      if(response.status===200){
+        console.log(resp.data)
+        return response.data
+        
+      }else{
+        console.log(resp.data)
+        notify(resp.data.error)
+        throw new Error(response.data.error);
+      }
+  
+  }catch(error){
+    console.log(error)
+    throw error
+  }
+}
+
+  const notify=useNotify()
+  const {error,data}=useQuery({
+    queryKey:['User'],
+    queryFn:User,
+
+})
+  
+// const avg=()=>{
+//   const avgVal=data.budget?Math.floor(data.budget%100):100
+//   return avgVal
+// }
+  
+
   return (
     <>
       <div className="glass parse w-full h-full z-index-[2] z-0 px-2 py-2 border-2 rounded-lg animate-fade-down">
@@ -14,20 +54,20 @@ function UserInfo() {
         <div className="w-full flex flex-col items-center justify-center px-2 py-5 gap-2 ">
           <div className="w-full flex flex-col items-center justify-center px-2 py-5 gap-2 glass">
           <p className="px-2 py-2 bg-slate-300 text-black rounded-lg font-medium">
-            Ichigo kurosaki
+            {data.username}
           </p>
           <p className="px-2 py-2 bg-slate-300 text-black rounded-lg font-medium">
-            Current Buget:₹10000
+            Current Buget:₹{data.budget}
           </p>
           <p className="px-2 py-2 bg-slate-300 text-black rounded-lg font-medium">
-            Total spend:₹10000
+            Total spend:₹{data.sum||"no expense"}
           </p>
           </div>
           <div className="flex justify-center item-center w-full h-fit gap-8 px-1 py-5 ">
           <div
             className="radial-progress text-center text-sm text-white"
             style={{
-              "--value": "70",
+              "--value": `70`,
               "--size": "7.5rem",
               "--thickness": "0.5rem",
               
@@ -35,7 +75,7 @@ function UserInfo() {
             }}
             role="progressbar"
           >
-           <p className="text-white text-center px-2 py-2">current budget 70%</p>
+           <p className="text-white text-center px-2 py-2">current budget {70}%</p>
           </div>
           <div
             className="radial-progress text-center"

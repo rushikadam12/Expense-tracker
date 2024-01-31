@@ -1,15 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import img from "../assets/images";
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { GiMoneyStack } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { MdEmail } from "react-icons/md";
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  const notify = () => toast("👍🏼 form submit!", {
+
+
+  const [email,setEmail]=useState(null);
+  const [username,setUsername]=useState(null);
+  const [password,setPassword]=useState(null);
+  const [budget,setBudget]=useState(null);
+  const Redirect=useNavigate()
+
+  const notify = (message) => toast(`${message}`, {
     position: "top-right",
     autoClose: 3000,
     hideProgressBar: false,
@@ -18,9 +28,41 @@ function Signup() {
     draggable: true,
     progress: undefined,
     theme: "dark"});
+
+    const emptyTheState=()=>{
+      setEmail('')
+      setPassword('')
+      setBudget('')
+      setUsername('')
+    }
+    // username, email, password, budget 
+    const NewUser=async(e)=>{
+      e.preventDefault();
+        try{
+              const resp=await axios.post('http://localhost:5122/api/Register',{
+                  username:username,
+                  email:email,
+                  password:password,
+                  budget:budget,
+              })
+              if(resp){
+                console.log(resp.data)
+                notify(resp.data.message)
+                
+                emptyTheState()
+                Redirect('/login')
+              }else{
+                  console.log(resp.data.error)
+              }
+        }catch(error){
+          console.log(error)
+          notify("oops!server issues")
+        } 
+    }
+
   return (
     <>
-      <div className="  md:w-full w-[100%] min-h-screen  md:px-12 md:py-5 px-5 py-5 flex flex-col md:flex-row items-center justify-center flex-wrap">
+      <form className="  md:w-full w-[100%] min-h-screen  md:px-12 md:py-5 px-5 py-5 flex flex-col md:flex-row items-center justify-center flex-wrap" onSubmit={NewUser}>
 
         <div className="glass md:min-w-[50%] flex justify-center md:flex-row flex-col items-center  px-5 py-5 gap-[1rem] shadow-2xl rounded-xl animate-fade-up animate-ease-out">
           
@@ -41,12 +83,13 @@ function Signup() {
             <input
               className="px-2 py-1 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent font-semibold " type="text"
               required
+              onChange={(e)=>{setUsername(e.target.value)}}
             />
             <label className="flex gap-1 px-1 md:text-lg">
               <FaLock size={23} />
               Email:
             </label>
-            <input className="px-2 py-1 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent required" type="email"/>
+            <input className="px-2 py-1 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent required" type="email" onChange={(e)=>{setEmail(e.target.value)}}/>
             <label className="flex gap-1 px-1 md:text-lg">
               <MdEmail size={25} />
               Password:
@@ -55,6 +98,7 @@ function Signup() {
               className="px-2 py-1 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent "
               type='password'
               required
+              onChange={(e)=>{setPassword(e.target.value)}}
             />
             <label className="flex gap-1 px-1 md:text-lg">
               <GiMoneyStack size={25} />
@@ -62,11 +106,11 @@ function Signup() {
             </label>
             <input
               className="px-1 py-2 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent "
-              required type='number'
+              required type='number' onChange={(e)=>{setBudget(e.target.value)}}
             />
             <button
               className="text-slate-800 mt-1 px-2 py-2 bg-[#60C5EE] rounded-lg hover:bg-[#7edaff] md:text-xl text-center font-semibold"
-              type="submit"  onClick={notify} 
+              type="submit" 
             >
               SignUp
             </button>
@@ -78,7 +122,7 @@ function Signup() {
             </p>
           </div>
         </div>
-      </div>
+      </form>
     </>
   );
 }

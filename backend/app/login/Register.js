@@ -6,16 +6,16 @@ const Hpassword=require('../login/HashPass')
 
 router.post("/", async (req, res) => {
   const { username, email, password, budget } = req.body;
-  //console.log(req.body);
+  // console.log(req.body);
   try {
     if (!username || !email || !budget || !password) {
       console.log("you visited post request");
-      return res.json({ error: "pls enter your all fields" });
+      return res.send({ error: "pls enter your all fields" });
     }
 
     const existingUser = await User.findOne({ email: email })//search for email in database
     if (existingUser) {
-      return res.status(422).json({ error: "email already present" });
+      return res.status(422).send({ message: "email already present" });
     }
 
     const hpass=await Hpassword(password);//function for convert into hash format

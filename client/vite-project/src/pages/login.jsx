@@ -1,15 +1,45 @@
-import React from 'react'
+import React, { useState } from 'react'
 import img from '../assets/images'
 import { PiUserCircleFill } from "react-icons/pi";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { Link } from 'react-router-dom';
+import useNotify from '../hooks/useNotify';
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 function Login() {
+  const [email,setEmail]=useState('')
+  const [password,setPassword]=useState('')
+  const notify=useNotify()
+  const Redirect=useNavigate()
+  const UserLogin=async()=>{
+    try{
+        const resp=await axios.post("http://localhost:5122/api/Login",{
+         email:email,
+         password:password 
+        })
+        if(resp.status===200){
+          console.log(resp.data.message)
+          localStorage.setItem('token',resp.data.token)
+          notify(resp.data.message||resp.data.error)
+          setEmail('')
+          setPassword('')
+          Redirect('/Home')
+        }else{
+          console.log(resp.data)
+          notify(resp.data.message||resp.data.error)
+        }
+    }catch(error){
+      console.log(error)
+      notify('oops! server problem')
+    }
+  }
+
   return (
     <>
     <div className="w-full min-h-screen  md:px-12 md:py-5  px-5 py-5 flex flex-col md:flex-row items-center justify-center flex-wrap font-customFont font-medium">
 
-      <div className="md:min-w-[50%] flex  md:flex-row flex-col justify-center items-center glass px-5 py-5 gap-[1rem] shadow-2xl rounded-xl animate-fade-left  animate-ease-out">
+      <div className="md:min-w-[50%] flex  md:flex-row flex-col justify-center items-center  px-5 py-5 gap-[1rem] shadow-2xl rounded-xl animate-fade-left  animate-ease-out glass ">
         <div>
         <img
           src={img[1].url}
@@ -26,14 +56,14 @@ function Login() {
             </label>
             <input
               className="px-2 py-1 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent font-semibold " type="text"
-              required
+              required onChange={(e)=>{setEmail(e.target.value)}}
             />
             <label className="flex px-1 gap-1 md:text-lg">
               <RiLockPasswordFill size={24} />
               Password:
             </label>
             <input
-              className="px-2 py-1 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent font-semibold " type="password"
+              className="px-2 py-1 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent font-semibold " type="password" onChange={(e)=>{setPassword(e.target.value)}}
               required
             />
              <p className='text-end'>
@@ -43,7 +73,7 @@ function Login() {
             
              <button
               className="mt-1 px-2 py-2 bg-[#60C5EE] rounded-lg hover:bg-[#63cef8] md:text-xl text-center font-semibold"
-              type="submit"  
+                onClick={UserLogin} 
             >
               Sign In
             </button>

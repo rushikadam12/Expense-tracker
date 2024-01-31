@@ -31,11 +31,11 @@ function Navbar() {
             />
           )}
         </button>
-        <p className="w-full px-1 py-1 self-center md:text-xl text-[1rem] text-nowrap">
+        <Link className="w-fit h-fit m-auto"><p className="w-full px-1 py-1 self-center md:text-xl text-[1rem] text-nowrap">
           𝓟𝓮𝓷𝓷𝔂𝓦𝓲𝓼𝓮✍
-        </p>
+        </p></Link>
         <div className="w-full flex justify-end items-end md:gap-[1rem] gap-[0.1rem] md:text-xl text-sm px-2">
-          <Link className="px-1 py-1 self-center " to="/">
+          <Link className="px-1 py-1 self-center " to="/Home">
             Home
           </Link>
           <Link className="px-1 py-1 self-center ">About</Link>

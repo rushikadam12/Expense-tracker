@@ -7,9 +7,10 @@ router.get("/User",async(req,res)=>{
         const _id=req.userId
         const resp=await User.findOne({_id}).select({_id:1,username:1,email:1,budget:1})
         if(!resp){
-            res.status(400).json({error:"User is not present database"})
+            res.status(201).json({error:"User is not present database"})
         }
         res.status(200).json(resp)
+        
 
     }catch(error){
         res.status(500).json({error})

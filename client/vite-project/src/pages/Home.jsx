@@ -4,6 +4,8 @@ import UserInfo from "./UserInfo";
 import Footer from "../pages/Footer";
 function Home() {
   const exp = "asdadasd";
+  
+
   return (
     <>
       <main className="md:w-full w-full  min-h-[100dvh] flex md:flex-row flex-col">
@@ -32,9 +34,7 @@ function Home() {
           </div>
         </div>
       </main>
-      <footer>
-        <Footer />
-      </footer>
+      <footer><Footer/></footer>
     </>
   );
 }
