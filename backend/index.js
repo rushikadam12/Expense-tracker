@@ -13,15 +13,19 @@ const UserData=require('./app/login/UserData.js')
 const verifyToken=require('./app/middleware/VerifyToken.js')
 const deleteExpense=require('./app/Expense/deleteExpense.js')
 const rateLimit=require('express-rate-limit')
+const cookieParser=require('cookie-parser');
 
 app=express();
 app.use(express.json())
+app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(cors({
     origin:["http://localhost:5173"],
     methods:["GET","POST","PUT","DELETE"],
     credentials:true,
+
 }));
+
 app.use(session({
     key:"userId",
     secret:process.env.SECURE_KEY,

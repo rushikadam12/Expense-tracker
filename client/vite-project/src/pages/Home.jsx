@@ -1,5 +1,5 @@
 import React from "react";
-import Expense from "./Expense";
+import Expense from "../components/Expense";
 import UserInfo from "./UserInfo";
 import Footer from "../pages/Footer";
 function Home() {
@@ -15,22 +15,22 @@ function Home() {
         <div className="min-w-[60%]  md:max-h-[100dvh] h-fit px-1 py-1 md:overflow-x-hidden ">
           <div className="  min-w-[100%]   min-h-[100%] flex  flex-col px-1 py-1 gap-[1rem] ">
             <Expense />
+            {/* <Expense />
+            <Expense />
+            <Expense /> */}
+
+
+
+            {/* <Expense />
+            <Expense />
+            <Expense />
+            <Expense />
             <Expense />
             <Expense />
             <Expense />
 
-
-
             <Expense />
-            <Expense />
-            <Expense />
-            <Expense />
-            <Expense />
-            <Expense />
-            <Expense />
-
-            <Expense />
-            <Expense />
+            <Expense /> */}
           </div>
         </div>
       </main>

@@ -15,23 +15,20 @@ function Login() {
   const UserLogin=async()=>{
     try{
         const resp=await axios.post("http://localhost:5122/api/Login",{
-         email:email,
-         password:password 
+         email,
+         password 
         })
         if(resp.status===200){
-          console.log(resp.data.message)
+          // console.log(resp.data.message)
           localStorage.setItem('token',resp.data.token)
-          notify(resp.data.message||resp.data.error)
           setEmail('')
           setPassword('')
+          notify(resp.data.message)
           Redirect('/Home')
-        }else{
-          console.log(resp.data)
-          notify(resp.data.message||resp.data.error)
         }
     }catch(error){
       console.log(error)
-      notify('oops! server problem')
+      notify(error.response.data.error)
     }
   }
 

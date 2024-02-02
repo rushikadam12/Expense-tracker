@@ -5,6 +5,7 @@ import { PiNotePencilBold } from "react-icons/pi";
 import { MdOutlineDelete } from "react-icons/md";
 function Expense() {
   const [Loading, setLoading] = useState(true);
+  let data=false
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -15,24 +16,25 @@ function Expense() {
     <>
       <div className=" glass flex min-w-full h-fit px-1 py-1  rounded-lg text-slate-200 text-size-[1rem] flex-col md:flex-row animate-fade-down">
         {Loading ? (
-          <>
-            <div class=" outline-none shadow rounded-md p-1 max-w-sm min-w-full mx-auto ">
-              <div class="animate-pulse flex space-x-4">
-                <div class="rounded-full bg-slate-200 h-10 w-10"></div>
-                <div class="flex-1 space-y-6 py-1">
-                  <div class="h-2 bg-slate-200 rounded"></div>
-                  <div class="space-y-3">
-                    <div class="grid grid-cols-3 gap-4">
-                      <div class="h-2 bg-slate-200 rounded col-span-2"></div>
-                      <div class="h-2 bg-slate-200 rounded col-span-1"></div>
+          
+            <div className=" outline-none shadow rounded-md p-1 max-w-sm min-w-full mx-auto ">
+              <div className="animate-pulse flex space-x-4">
+                <div className="rounded-full bg-slate-200 h-10 w-10"></div>
+                <div className="flex-1 space-y-6 py-1">
+                  <div className="h-2 bg-slate-200 rounded"></div>
+                  <div className="space-y-3">
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="h-2 bg-slate-200 rounded col-span-2"></div>
+                      <div className="h-2 bg-slate-200 rounded col-span-1"></div>
                     </div>
-                    <div class="h-2 bg-slate-200 rounded"></div>
+                    <div className="h-2 bg-slate-200 rounded"></div>
                   </div>
                 </div>
               </div>
             </div>
-          </>
+          
         ) : (
+          data?(<>
           <div className=" w-full px-2 py-2 flex gap-4 flex-col md:flex-row item-center animate-fade animate-ease-out">
             <p className="md:w-fit w-full px-2 py-2 font-medium flex flex-row md:flex-col md:gap-1 gap-4 text-[1.5rem] text-center justify-center items-center">
               <BsCashCoin size={30} />
@@ -46,10 +48,10 @@ function Expense() {
                   Jan 7{" "}
                 </p>
                 <p className="w-fit flex flex-col ">
-                  <p className="flex gap-2 px-1 py-1 rounded-lg bg-slate-400 text-slate-800 md:font-medium">
+                  <label className="flex gap-2 px-1 py-1 rounded-lg bg-slate-400 text-slate-800 md:font-medium">
                     <PiNotePencilBold size={20} />
                     category
-                  </p>
+                  </label>
                 </p>
               </div>
               <div className=" w-full py-1 text-[1rem]  ">
@@ -70,6 +72,7 @@ function Expense() {
               </button>
             </div>
           </div>
+          </>):<><div className="No data found w-full md:min-h-[100dvh] md:flex "><p className="m-auto">No data found</p></div></>
         )}
       </div>
     </>

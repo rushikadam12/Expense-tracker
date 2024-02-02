@@ -18,8 +18,8 @@ function NewUser() {
         <section className="min-w-full min-h-[100dvh] flex justify-center items-center m-auto md:flex-row flex-col">
             
               <div className='md:w-[40%] px-2 py-2  '>
-              <p className='md:text-[3.5rem] text-[2rem] text-center animate-fade-right transition 1s px-2 py-2 font-semibold'>Save money without thinking about it</p>
-              <p className='md:text-[1.5rem] text-xl text-center animate-fade-right animate-delay-200 px-2 py-2'>
+              <p className='md:text-[3.5rem] text-[2rem] text-center  px-2 py-2 font-semibold'>Save money without thinking about it</p>
+              <p className='md:text-[1.5rem] text-xl text-center  px-2 py-2'>
                 PennyWise analyzes your spending and automatically perfect amount every day so you don't have to worry about it
               </p>
               </div>
@@ -30,7 +30,8 @@ function NewUser() {
              
         </section>
         <p className='px-5 py-5 w-full self-cen flex items-center justify-center '>
-          <button className='btn btn-secondary btn-lg glass hover:bg-purple-400 hover:text-slate-800 text-slate-200' onClick={()=>{Navigate('/signup')}}>SignUp<FaLongArrowAltRight/></button></p>
+          <button className='btn btn-secondary btn-lg glass hover:glass hover:bg-purple-800 md:active:animate-jump md:active:animate-once md:active:animate-ease-linear md:active:animate-reverse
+             text-slate-200' onClick={()=>{Navigate('/signup')}}>SignUp<FaLongArrowAltRight/></button></p>
     </div>
     </>
   )
