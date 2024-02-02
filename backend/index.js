@@ -17,8 +17,8 @@ const cookieParser=require('cookie-parser');
 
 app=express();
 app.use(express.json())
-app.use(cookieParser())
 app.use(bodyParser.json())
+app.use(cookieParser())
 app.use(cors({
     origin:["http://localhost:5173"],
     methods:["GET","POST","PUT","DELETE"],
@@ -26,16 +26,16 @@ app.use(cors({
 
 }));
 
-app.use(session({
-    key:"userId",
-    secret:process.env.SECURE_KEY,
-    resave:true,
-    saveUninitialized:false,
-    cookie:{
-        expires:60*60*24,
+// app.use(session({
+//     key:"userId",
+//     secret:process.env.SECURE_KEY,
+//     resave:true,
+//     saveUninitialized:false,
+//     cookie:{
+//         expires:60*60*24,
         
-    },
-}))
+//     },
+// }))
 const limiter = rateLimit({//to limit the api request from user
     windowMs: 60 * 1000, // 1 minute
     max: 50, // max requests per minute

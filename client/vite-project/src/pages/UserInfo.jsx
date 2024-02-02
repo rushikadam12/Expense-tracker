@@ -8,9 +8,10 @@ function UserInfo() {
   const Redirect=useNavigate()
   const User = async () => {
     try {
-      const response = await axios.get("http://localhost:5122/api/User", { withCredentials: true}
+      const response = await axios.get("http://localhost:5122/api/User",{ withCredentials: true}
       )
-      if (response.status === 200) {  
+      if (response.status === 200) {
+        console.log(response.data)  
            return await response.data;
       }
     } catch (error) {

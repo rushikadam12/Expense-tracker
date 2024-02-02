@@ -5,7 +5,7 @@ import { PiNotePencilBold } from "react-icons/pi";
 import { MdOutlineDelete } from "react-icons/md";
 function Expense() {
   const [Loading, setLoading] = useState(true);
-  let data=false
+  let data=true
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);

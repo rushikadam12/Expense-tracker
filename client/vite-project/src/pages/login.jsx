@@ -17,10 +17,10 @@ function Login() {
         const resp=await axios.post("http://localhost:5122/api/Login",{
          email,
          password 
-        })
+        },{withCredentials: true})
         if(resp.status===200){
           // console.log(resp.data.message)
-          localStorage.setItem('token',resp.data.token)
+
           setEmail('')
           setPassword('')
           notify(resp.data.message)
