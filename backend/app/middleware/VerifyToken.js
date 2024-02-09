@@ -4,8 +4,7 @@ const jwt=require('jsonwebtoken')
 module.exports=VerifyToken=(req,res,next)=>{
    
     const token= req.cookies.token;//getting token form header
-    console.log(token)
-        
+            
         if(!token){
             return res.status(498).json({error:"token not found"})
         }

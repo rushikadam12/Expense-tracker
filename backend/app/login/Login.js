@@ -4,11 +4,10 @@ const router = express.Router();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../DB/register");
-//const verifyToken=require('../middleware/VerifyToken')
+
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
-  console.log({ email: email, password: password });
-  console.log();
+
   if (!email || !password) {
     return res.status(401).send({ error: "Invalid credentials" });
   }
@@ -29,9 +28,8 @@ router.post("/", async (req, res) => {
         // console.log(token);
 
         if (token) {
-          // res.setcookie("token",token,{httpOnly:true,secure: true})
-
-          res.cookie('token', token, {}).json(user);
+          res.cookie("token", token, { httpOnly: true }).json(user);
+          // res.status(200).send({token:token,status:"ok",`})
         }
       } else {
         // console.log('visited')

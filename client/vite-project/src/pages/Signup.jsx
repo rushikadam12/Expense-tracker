@@ -52,11 +52,11 @@ function Signup() {
                 emptyTheState()
                 Redirect('/login')
               }else{
-                  console.log(resp.data.error)
+                
               }
         }catch(error){
           console.log(error)
-          notify("oops!server issues")
+          notify(error.response.data.error?error.response.data.error:"oops!server issues")
         } 
     }
 

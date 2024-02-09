@@ -13,8 +13,7 @@ router.get("/:sortField/:sortOrder",async(req,res)=>{
             const sortOrder=req.params.sortOrder.toLowerCase()==='desc'?-1:1;
             const resp=await Expense.find({user_id}).sort({[sortField]:sortOrder});
             const sum=resp.reduce((total,entry)=>{return total+entry.amount},0)
-            //console.log(sum)
-            //console.log(resp)
+            
             return res.status(200).send({data:resp,totalExpense:sum})
     }catch(error){
         console.log(error)

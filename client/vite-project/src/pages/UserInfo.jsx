@@ -1,34 +1,42 @@
 import React, { useState } from "react";
 import useNotify from "../hooks/useNotify";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-function UserInfo() {
+import axiosInstance from "../hooks/axiosInstances";
+import AddExpense from "../components/AddExpense";
+function UserInfo({ totalSpend, expenseCount }) {
   const notify = useNotify();
-  const Redirect=useNavigate()
+  const Redirect = useNavigate();
+  const [addExpense, setaddExpense] = useState(false);
   const User = async () => {
     try {
-      const response = await axios.get("http://localhost:5122/api/User",{ withCredentials: true}
-      )
+      const response = await axiosInstance.get("User");
       if (response.status === 200) {
-        console.log(response.data)  
-           return await response.data;
+        console.log(response.data);
+        return await response.data;
       }
     } catch (error) {
-      throw error
+      throw error;
     }
+  };
+  const calculate = (data, totalSpend) => {
+    if (!data || isNaN(data.budget) || isNaN(totalSpend) || totalSpend === 0) {
+          return 0; 
+    }
+    const TotalAmount = data && data.budget + totalSpend;
+    const avg = (totalSpend / TotalAmount) * 100;
+
+    return avg.toFixed(2);
   };
 
   const { isError, error, data } = useQuery({
     queryKey: ["Users"],
     queryFn: User,
-    
   });
   if (isError) {
     notify(error.response.data.error);
-    Redirect('/login')
+    Redirect("/login");
     console.log(error);
-   
   }
 
   return (
@@ -40,48 +48,60 @@ function UserInfo() {
           </div>
         </div>
         <div className="w-full flex flex-col items-center justify-center px-2 py-5 gap-2 ">
-          <div className="w-full flex flex-col items-center justify-center px-2 py-5 gap-2 glass">
-            <p className="px-2 py-2 bg-slate-300 text-black rounded-lg font-medium">
-              {data&&data.username}
-            </p>
-            <p className="px-2 py-2 bg-slate-300 text-black rounded-lg font-medium">
-              Current Buget:₹{data&&data.budget}
-            </p>
-            <p className="px-2 py-2 bg-slate-300 text-black rounded-lg font-medium">
-              Total spend:₹{(data&&data.sum) || "no expense"}
-            </p>
+          <div className="w-full flex md:flex-row  items-center justify-center px-2 py-5 gap-2 ">
+            <div className="stat place-items-center">
+              <div className="stat-value">{calculate(data, totalSpend)}%</div>
+              <div className="stat-title">amount spend</div>
+              <div className="stat-desc text-secondary">current average</div>
+            </div>
+            <div className="stat place-items-center">
+              <div className="stat-value">{expenseCount}</div>
+              <div className="stat-title">total expense</div>
+              <div className="stat-desc text-secondary">current count</div>
+            </div>
           </div>
-          <div className="flex justify-center item-center w-full h-fit gap-8 px-1 py-5 ">
-            <div
-              className="radial-progress text-center text-sm text-white"
-              style={{
-                "--value": `70`,
-                "--size": "7.5rem",
-                "--thickness": "0.5rem",
+          <div className="w-fit flex flex-col items-start justify-start">
+            <progress
+              className={"progress progress-accent w-56"}
+              value={Math.round(calculate(data, totalSpend))}
+              max="100"
+            ></progress>
+            <label className="stat-actions">Expense bar</label>
+          </div>
+          <div className=" flex flex-col justify-center item-center h-fit gap-10 px-1 py-5 ">
+            <div className="stats bg-primary text-primary-content md:flex block">
+              <div
+                className="stat md:w-full w-fit place-items-center block"
+                style={{ placeSelf: "baseline" }}
+              >
+                <div className="stat-title ">Amount spend</div>
+                <div className="stat-value ">
+                  ₹{totalSpend ? totalSpend : "no expense"}
+                </div>
+              </div>
 
-                color: "green",
-              }}
-              role="progressbar"
-            >
-              <p className="text-white text-center px-2 py-2">
-                current budget {70}%
-              </p>
+              <div className="stat ">
+                <div className="stat-title">Current balance</div>
+                <div className="stat-value">₹{data?.budget?data?.budget:'no expense'}</div>
+                <div className="stat-actions gap-5 self-center">
+                  <button className="btn btn-sm">deposit</button>
+                </div>
+              </div>
             </div>
-            <div
-              className="radial-progress text-center"
-              style={{
-                "--value": `70`,
-                "--size": "7.5rem",
-                "--thickness": "0.5rem",
-                color: "red",
+          </div>
+          <div className="">
+            <button
+              className="btn btn-outline"
+              onClick={() => {
+                setaddExpense(!addExpense);
               }}
-              role="progressbar"
             >
-              <p className="text-white text-center px-2 py-2 ">spend 70%</p>
-            </div>
+              + Add expense
+            </button>
           </div>
         </div>
       </div>
+      {addExpense ? <AddExpense addExpFun={setaddExpense} addExpVal={addExpense} /> : null}
     </>
   );
 }
