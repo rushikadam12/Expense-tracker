@@ -3,7 +3,10 @@ import { BsCashCoin } from "react-icons/bs";
 import { BsCalendar2DateFill } from "react-icons/bs";
 import { PiNotePencilBold } from "react-icons/pi";
 import { MdOutlineDelete } from "react-icons/md";
-function Expense({
+import axiosInstance from "../hooks/axiosInstances";
+import { useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+const Expense = ({
   _id,
   user_id,
   date,
@@ -11,7 +14,8 @@ function Expense({
   category,
   amount,
   payment_method,
-}) {
+}) => {
+  const queryClient = useQueryClient();
   const [Loading, setLoading] = useState(true);
   const [UserDate, setUserDate] = useState(null);
   const setDate = async () => {
@@ -20,6 +24,36 @@ function Expense({
 
     setUserDate(NewDate);
   };
+
+  const DeleteExp = async (_id,user_id) => {
+    
+    try {
+      const resp = await axiosInstance.delete("/Delete", {
+        data: {_id},
+      });
+      if (resp.status == 200) {
+        notify("Expense is deleted");
+        console.log("expense is deleted");
+      } else {
+        throw new Error(resp.data.error);
+      }
+    } catch (error) {
+      console.log(error);
+      // notify(error)
+    }
+  };
+
+  const { mutate } = useMutation({
+    mutationFn:()=>DeleteExp(_id,user_id),
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["UserData"] });
+      await queryClient.invalidateQueries({ queryKey: ["Users"] });
+    },
+    onError: () => {
+      console.log("!oops server issue");
+    },
+  });
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -74,12 +108,13 @@ function Expense({
               <div className="flex   flex-col text-end items-end gap-2 ">
                 <p className="md:px-2 md:py-2">₹{amount}</p>
                 <button
-                  className="self-end flex justify-end items-end item-end  md:self-end md:ml-0 md:mr-0 md:my-auto md:mx-0 md:mb-0 md:tooltip lg:tooltip"
+                  className="self-end flex justify-end items-end item-end  md:self-end md:ml-0 md:mr-0 md:my-auto md:mx-0 md:mb-0 md:tooltip lg:tooltip outline-none"
                   data-tip="Delete"
                 >
                   <MdOutlineDelete
                     size={30}
                     className="m-auto md:self-center ml-auto hover:text-red-500 transition duration-300"
+                    onClick={()=>{mutate()}}
                   />
                 </button>
               </div>
@@ -89,6 +124,6 @@ function Expense({
       </div>
     </>
   );
-}
+};
 
 export default Expense;

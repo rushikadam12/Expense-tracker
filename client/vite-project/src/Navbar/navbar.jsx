@@ -12,27 +12,30 @@ import { useUserContext } from "../components/useContext";
 
 function Navbar() {
   const [Dropmenu, setDropmenu] = useState(false);
-  const {setAuthUser,authuser}=useUserContext();
-  const Redirect=useNavigate()
+  const { setAuthUser, authuser } = useUserContext();
+  const Redirect = useNavigate();
   const LogOut = async () => {
     try {
       const resp = await axiosInstances.get("/logout");
-      if(resp.status===200){
-        setDropmenu(false)
-        Redirect('/login')
-        await setAuthUser(false)
-        
+      if (resp.status === 200) {
+        setDropmenu(false);
+        Redirect("/login");
+        await setAuthUser(false);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
   return (
     <>
-      <div className="prose md:w-full w-[100%] md:py-2 md:m-auto flex font-customFont md:x-2 px-1 py-4 ">
+      <div className="prose md:w-full w-[100%] md:py-2 md:m-auto flex font-customFont md:x-2 px-1 py-4 border-b-[1px]">
         <button
-          className={authuser?`md:px-1 md:py-1  rounded-xl px-1 py-1 outline-none transition animate-ease-in`:'hidden'}
+          className={
+            authuser
+              ? `md:px-1 md:py-1  rounded-xl px-1 py-1 outline-none transition animate-ease-in`
+              : "hidden"
+          }
           onClick={() => {
             setDropmenu(!Dropmenu);
           }}
@@ -51,16 +54,30 @@ function Navbar() {
             />
           )}
         </button>
-        <Link className="w-fit h-fit m-auto transition duration-1000" to={authuser?"/Home":"/"}>
-          <p className="w-full px-1 py-1 self-center md:text-xl text-[1rem] text-nowrap">
+        <Link
+          className="w-fit h-fit m-auto transition duration-1000"
+          to={authuser ? "/Home" : "/"}
+        >
+          <p className="w-full px-1 py-1 self-center md:text-xl text-[1rem] text-nowrap whitespace-nowrap">
             𝓟𝓮𝓷𝓷𝔂𝓦𝓲𝓼𝓮✍
           </p>
         </Link>
-        <div className={"w-full flex justify-end items-end md:gap-[1rem] gap-[0.5rem] md:text-xl text-sm px-2"}>
-          <Link className={authuser?"px-1 py-1 self-center ":"hidden"} to="/Home">
+        <div
+          className={
+            "w-full flex justify-end items-end md:gap-[1rem] gap-[0.5rem] md:text-xl text-sm px-2"
+          }
+        >
+          <Link
+            className={
+              authuser
+                ? "px-1 py-1 self-center hover:border-b-2 transition duration-500 ease-in-out"
+                : "hidden"
+            }
+            to="/Home"
+          >
             Home
           </Link>
-          <button className={!authuser?"self-center":"hidden"}>
+          <button className={!authuser ? "self-center" : "hidden"}>
             <Link
               to="/login "
               className="glass rounded-xl self-center btn btn-outline btn-secondary sm:btn-sm md:btn-sm lg:btn-sm"
@@ -69,7 +86,7 @@ function Navbar() {
             </Link>
           </button>
           {/* <input type="checkbox" value="light" className="toggle theme-controller self-center sm:"/> */}
-          <button className={!authuser?"self-center":"hidden"}>
+          <button className={!authuser ? "self-center" : "hidden"}>
             <Link
               to="/signup "
               className=" rounded-xl self-center btn btn-primary  sm:btn-sm md:btn-sm lg:btn-sm"
@@ -99,9 +116,8 @@ function Navbar() {
           </li>
 
           <li className="w-full flex justify-center items-center  px-0 py-0  hover:bg-slate-500 transition-all">
-            
-              <CiSettings size={30} />
-            
+            <CiSettings size={30} />
+
             <Link className="px-2">Settings</Link>
           </li>
           <li className="w-full flex justify-center items-center  gap-1 hover:bg-slate-500 transition-all">
@@ -110,16 +126,17 @@ function Navbar() {
             </p>
             <Link className="px-2">About</Link>
           </li>
-          <li className="w-full flex justify-center items-center gap-1 hover:bg-slate-500 transition-all text-left" onClick={LogOut}>
-           
-              <LuLogIn size={30} />
-            
-            <Link className="px-2" >LogOut</Link>
+          <li
+            className="w-full flex justify-center items-center gap-1 hover:bg-slate-500 transition-all text-left"
+            onClick={LogOut}
+          >
+            <LuLogIn size={30} />
+
+            <Link className="px-2">LogOut</Link>
           </li>
           <li className="w-full flex justify-center items-center  gap-1 hover:bg-slate-500 transition-all">
-            
-              <MdHome size={30} />
-            
+            <MdHome size={30} />
+
             <Link className="px-2">Home</Link>
           </li>
         </ul>

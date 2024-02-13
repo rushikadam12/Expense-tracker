@@ -4,11 +4,24 @@
 *{
     box-sizing: border-box;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+/* Note: Firefox doesn't support hiding scrollbar thumb with this method */
+.hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    
+}
+
 ::-webkit-scrollbar {
    
     width: 5px;
     border-radius: 1rem;
 }
+
  
 /* Track */
 ::-webkit-scrollbar-track {

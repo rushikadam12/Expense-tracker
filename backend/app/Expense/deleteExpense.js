@@ -4,17 +4,18 @@ const User=require('../DB/register.js')
 const Expense=require('../models/ExpenseModel.js')
 
 router.delete("/",async(req,res)=>{
-    const {user_id,_id}=req.body;
-    if(!user_id||!_id){
+    const {_id}=req.body;
+    console.log(_id);
+    if(!_id){
         return res.status(400).send("Pls fill all the field")
     }
     try{    
-            
+            const user_id=req.userId;
             const user=await User.findOne({_id:user_id})//find user first
      
             const expense=await Expense.findOne({_id:_id})
             if(!expense||!user){
-               return res.status(401).json({error1:"no expense or user found in database"})
+               return res.status(401).json({error:"no expense or user found in database"})
             }
 
             const result=await Expense.deleteOne({_id})
