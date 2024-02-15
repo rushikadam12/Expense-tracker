@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import Navbar from "./Navbar/navbar";
 import NewUser from "./pages/NewUser/NewUSer";
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import Analytics from "./pages/Analytics";
 
 function App() {
   return (
@@ -20,7 +21,17 @@ function App() {
                 <Home />
               </ProtectedRoutes>
             }
-          />
+          >
+          </Route>
+          <Route
+              path="Home/analytics"
+              element={
+                <ProtectedRoutes>
+                  <Analytics />   
+              </ProtectedRoutes>
+                            
+              }
+            />
 
           <Route path="/" element={<NewUser />} exact />
           <Route path="/signup" element={<Signup />} />

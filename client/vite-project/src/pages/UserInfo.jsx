@@ -36,7 +36,7 @@ function UserInfo({ totalSpend, expenseCount }) {
     return avg.toFixed(2);
   };
 
-  const { isError, error, data } = useQuery({
+  const { isLoading,isError, error, data } = useQuery({
     queryKey: ["Users"],
     queryFn: User,
   });
@@ -44,6 +44,11 @@ function UserInfo({ totalSpend, expenseCount }) {
     notify(error.response.data.error);
     Redirect("/login");
     console.log(error);
+  }
+  if(isLoading){
+    return(
+    <><h1>Loading....</h1></>
+    )
   }
 
   return (

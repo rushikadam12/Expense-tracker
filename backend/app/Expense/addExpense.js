@@ -15,7 +15,7 @@ router.post('/',async(req,res)=>{
        
         const Id=req.userId;
         console.log(Id)
-        const result= new Expense({user_id:Id,date:new Date(),amount,category,description,payment_method})//create new expense
+        const result= new Expense({user_id:Id,date: new Date(),amount,category,description,payment_method})//create new expense
         
         const resp=await result.save()//save the values into collection
         console.log(resp);

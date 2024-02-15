@@ -25,7 +25,7 @@ const Expense = ({
     setUserDate(NewDate);
   };
 
-  const DeleteExp = async (_id,user_id) => {
+  const DeleteExp = async (_id) => {
     
     try {
       const resp = await axiosInstance.delete("/Delete", {
