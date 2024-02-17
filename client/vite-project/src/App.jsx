@@ -7,6 +7,7 @@ import Navbar from "./Navbar/navbar";
 import NewUser from "./pages/NewUser/NewUSer";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Analytics from "./pages/Analytics";
+import Dashbord from "./pages/Dashbord";
 
 function App() {
   return (
@@ -28,6 +29,15 @@ function App() {
               element={
                 <ProtectedRoutes>
                   <Analytics />   
+              </ProtectedRoutes>
+                            
+              }
+            />
+             <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoutes>
+                  <Dashbord />   
               </ProtectedRoutes>
                             
               }

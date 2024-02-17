@@ -47,7 +47,7 @@ function UserInfo({ totalSpend, expenseCount }) {
   }
   if(isLoading){
     return(
-    <><h1>Loading....</h1></>
+    <><h1 className="text-2xl text-center">Loading....</h1></>
     )
   }
 
@@ -58,8 +58,11 @@ function UserInfo({ totalSpend, expenseCount }) {
           <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 hover:scale-[1.010] transition eas-in duration-500">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5M_W8YpcOhM2Qw0janaEtYjIX5vQCDkIOXL2GpJ_bZb5cUvZIbcVFUadRXUr5ZhKd_xw&usqp=CAU"/>
           </div>
+          
         </div>
+        
         <div className="w-full flex flex-col items-center justify-center px-2 py-5 gap-2 ">
+          <p className="px-2 py-2 ">Abhi</p>
         <div className="p-2 text-slate-800 text-xl bg-slate-100 rounded-xl self-center flex gap-1 font-semibold"> Allowances<GiCash className="self-center"/> ₹{TAmount(data,totalSpend)}</div>
           <div className="w-full flex md:flex-row  items-center justify-center px-2 py-5 gap-2 ">
             
@@ -69,7 +72,8 @@ function UserInfo({ totalSpend, expenseCount }) {
               <div className="stat-desc text-secondary">current average</div>
             </div>
             <div className="stat place-items-center">
-              <div className="stat-value">{expenseCount}</div>
+              <div className="stat-value countdown">
+              <span style={{"--value":`${expenseCount}`}}></span></div>
               <div className="stat-title">total expense</div>
               <div className="stat-desc text-secondary">current count</div>
             </div>
@@ -96,8 +100,8 @@ function UserInfo({ totalSpend, expenseCount }) {
 
               <div className="stat ">
                 <div className="stat-title">Current balance</div>
-                <div className="stat-value">
-                  ₹{data?.budget ? data?.budget : "no expense"}
+                <div className="stat-value countdown" >
+                ₹{data?.budget ? data?.budget : "no expense"}
                 </div>
                 <div className="stat-actions gap-5 self-center">
                   <button className="btn btn-sm">deposit</button>

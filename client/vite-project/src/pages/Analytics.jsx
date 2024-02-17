@@ -24,7 +24,7 @@ const Analytics = () => {
   });
   if(isLoading){
     return(<>
-      <h1 className="text-center transition ease-in-out duration-500">....</h1>
+      <h1 className="text-center transition ease-in-out duration-500 text-2xl">Loading....</h1>
     </>)
   }
 

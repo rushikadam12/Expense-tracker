@@ -46,7 +46,7 @@ function Home() {
           <h1 className="text-slate-200 text-2xl">Almost done....</h1>
         </div>
       </>
-    );
+    )
   }
 
   return (

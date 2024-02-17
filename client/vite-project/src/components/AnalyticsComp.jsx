@@ -26,6 +26,7 @@ const AnalyticsComp = ({data}) => {
         <CartesianGrid strokeDasharray="5 5" stroke="grey"/>
         <Area type="monotone" dataKey="amount" stroke="#2563eb" fill="#3b82f6" stackId={1}/>
         
+        
       </AreaChart>
       </ResponsiveContainer>
 

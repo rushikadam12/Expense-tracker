@@ -105,7 +105,7 @@ const Expense = ({
                 </div>
                 <div className=" w-full py-1 text-[1rem]  ">{description}</div>
               </div>
-              <div className="flex   flex-col text-end items-end gap-2 ">
+              <div className="flex  flex-col text-end items-end gap-2 ">
                 <p className="md:px-2 md:py-2">₹{amount}</p>
                 <button
                   className="self-end flex justify-end items-end item-end  md:self-end md:ml-0 md:mr-0 md:my-auto md:mx-0 md:mb-0 md:tooltip lg:tooltip outline-none"
