@@ -28,8 +28,8 @@ const Piechart = ({ data }) => {
           }}
         >
           <CartesianGrid stroke="#f5f5f5" />
-          <XAxis dataKey="category"  />
-          <YAxis />
+          <XAxis dataKey="category" stroke={'white'} />
+          <YAxis  stroke={'white'}/>
           <Tooltip />
           <Legend />
           <Area type="monotone" dataKey="category" fill="#8884d8" stroke="#8884d8"   />

@@ -5,19 +5,11 @@ import Footer from "../pages/Footer";
 import axiosInstance from "../hooks/axiosInstances";
 import { useQuery } from "@tanstack/react-query";
 import { Filter } from "../components/Filter";
+
 function Home() {
+ 
   const [searchitem, setsearchItem] = useState("");
   const [searchtype, setsearchType] = useState("description");
-
-  const handleInputChange = (value) => {
-    setsearchItem(value);
-  };
-
-  const handleFilter = (value) => {
-    setsearchType(value);
-  };
-
-  
 
   const Fetch = async () => {
     try {
@@ -30,6 +22,18 @@ function Home() {
       throw error;
     }
   };
+
+  const handleInputChange = (value) => {
+    setsearchItem(value);
+  };
+
+  const handleFilter = (value) => {
+    setsearchType(value);
+  };
+
+  
+
+
   const { data, error, isLoading } = useQuery({
     queryFn: Fetch,
     queryKey: ["UserData"],
