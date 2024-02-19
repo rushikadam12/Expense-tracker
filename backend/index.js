@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const Register = require("./app/login/Register.js");
 const Login = require("./app/login/Login.js");
-const session = require("express-session");
 const addExpense = require("./app/Expense/addExpense.js");
 const ByDate = require("./app/Sort/ByDate.js");
 const auth = require("./app/authentication/authentication.js");
