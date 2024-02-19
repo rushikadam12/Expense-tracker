@@ -39,7 +39,7 @@ function Signup() {
     const NewUser=async(e)=>{
       e.preventDefault();
         try{
-              const resp=await axios.post('https://pennywise-aypl.onrender.com/api/Register',{
+              const resp=await axios.post('https://pennywise-1ssn.onrender.com/api/Register',{
                   username:username,
                   email:email,
                   password:password,

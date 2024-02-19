@@ -24,7 +24,7 @@ function Login() {
     
     try {
       const resp = await axios.post(
-        "https://pennywise-aypl.onrender.com/ṅapi/Login",
+        "https://pennywise-1ssn.onrender.com/api/Login",
         {
           email,
           password,

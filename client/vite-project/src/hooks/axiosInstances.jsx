@@ -1,6 +1,6 @@
 import axios from 'axios';
 const axiosInstance = axios.create({
-  baseURL: "https://pennywise-aypl.onrender.com/api",
+  baseURL: "https://pennywise-1ssn.onrender.com/api",
   withCredentials: true, 
   headers: {
     "Content-Type": "application/json",
