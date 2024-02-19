@@ -21,8 +21,7 @@ app.use(express.json())
 app.use(bodyParser.json())
 app.use(cookieParser())
 app.use(cors({
-    origin:["https://expense-tracker-rose-xi.vercel.app"],
-    methods:["GET","POST","PUT","DELETE"],
+    origin:"https://expense-tracker-rose-xi.vercel.app",
     credentials:true,
 
 }));
