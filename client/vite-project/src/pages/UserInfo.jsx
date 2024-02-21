@@ -5,27 +5,29 @@ import { useNavigate } from "react-router-dom";
 import axiosInstance from "../hooks/axiosInstances";
 import AddExpense from "../components/AddExpense";
 import { GiCash } from "react-icons/gi";
+import Deposite from "../components/Deposite";
 function UserInfo({ totalSpend, expenseCount }) {
   const notify = useNotify();
   const Redirect = useNavigate();
   const [addExpense, setaddExpense] = useState(false);
+  const [adddeposit,setaddDeposit]=useState(false)
   const User = async () => {
     try {
       const response = await axiosInstance.get("User");
       if (response.status === 200) {
-        console.log(response.data);
+        // console.log(response.data);
         return await response.data;
       }
     } catch (error) {
       throw error;
     }
   };
-  const TAmount=(data)=>{
+  const TAmount = (data) => {
     if (!data || isNaN(data.budget) || isNaN(totalSpend) || totalSpend === 0) {
       return 0;
     }
     return data && data.budget + totalSpend;
-  }
+  };
   const calculate = (data, totalSpend) => {
     if (!data || isNaN(data.budget) || isNaN(totalSpend) || totalSpend === 0) {
       return 0;
@@ -36,7 +38,7 @@ function UserInfo({ totalSpend, expenseCount }) {
     return avg.toFixed(2);
   };
 
-  const { isLoading,isError, error, data } = useQuery({
+  const { isLoading, isError, error, data } = useQuery({
     queryKey: ["Users"],
     queryFn: User,
   });
@@ -45,27 +47,33 @@ function UserInfo({ totalSpend, expenseCount }) {
     Redirect("/login");
     console.log(error);
   }
-  if(isLoading){
-    return(
-    <><h1 className="text-2xl text-center">Loading....</h1></>
-    )
+  if (isLoading) {
+    return (
+      <>
+        <h1 className="text-2xl text-center self-center"><span className="loading loading-ring loading-lg"></span></h1>
+      </>
+    );
   }
 
   return (
     <>
       <div className="glass parse w-full h-full z-index-[2] z-0 px-2 py-2 border-2 rounded-lg animate-fade-down">
         <div className="avatar flex justify-center items-center px-2 py-2 ">
-          <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2 hover:scale-[1.010] transition eas-in duration-500">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5M_W8YpcOhM2Qw0janaEtYjIX5vQCDkIOXL2GpJ_bZb5cUvZIbcVFUadRXUr5ZhKd_xw&usqp=CAU"/>
+          <div className="avatar placeholder ring ring-primary rounded-full">
+            <div className="bg-neutral text-neutral-content rounded-full w-24">
+              <span className="text-3xl text-wrap text-center truncate">{data?.username}</span>
+            </div>
           </div>
-          
         </div>
-        
+
         <div className="w-full flex flex-col items-center justify-center px-2 py-5 gap-2 ">
-          <p className="px-2 py-2 ">Abhi</p>
-        <div className="p-2 text-slate-800 text-xl bg-slate-100 rounded-xl self-center flex gap-1 font-semibold"> Allowances<GiCash className="self-center"/> ₹{TAmount(data,totalSpend)}</div>
+          {/* <p className="px-1 py-1 text-xl font-semibold">{data?.username}</p> */}
+          <div className="p-2 text-slate-800 text-xl bg-slate-100 rounded-xl self-center flex gap-1 font-semibold">
+       
+            Allowances
+            <GiCash className="self-center" /> ₹{TAmount(data, totalSpend)}
+          </div>
           <div className="w-full flex md:flex-row  items-center justify-center px-2 py-5 gap-2 ">
-            
             <div className="stat place-items-center">
               <div className="stat-value">{calculate(data, totalSpend)}%</div>
               <div className="stat-title">amount spend</div>
@@ -73,7 +81,8 @@ function UserInfo({ totalSpend, expenseCount }) {
             </div>
             <div className="stat place-items-center">
               <div className="stat-value countdown">
-              <span style={{"--value":`${expenseCount}`}}></span></div>
+                <span style={{ "--value": `${expenseCount}` }}></span>
+              </div>
               <div className="stat-title">total expense</div>
               <div className="stat-desc text-secondary">current count</div>
             </div>
@@ -100,11 +109,11 @@ function UserInfo({ totalSpend, expenseCount }) {
 
               <div className="stat ">
                 <div className="stat-title">Current balance</div>
-                <div className="stat-value countdown" >
-                ₹{data?.budget ? data?.budget : "no expense"}
+                <div className="stat-value countdown">
+                  ₹{data?.budget ? data?.budget : "no expense"}
                 </div>
                 <div className="stat-actions gap-5 self-center">
-                  <button className="btn btn-sm">deposit</button>
+                  <button className="btn btn-sm" onClick={()=>{setaddDeposit(!adddeposit)}}>deposit</button>
                 </div>
               </div>
             </div>
@@ -124,6 +133,7 @@ function UserInfo({ totalSpend, expenseCount }) {
       {addExpense ? (
         <AddExpense addExpFun={setaddExpense} addExpVal={addExpense} />
       ) : null}
+      {adddeposit&&<Deposite adddeposit={adddeposit} setaddDeposit={setaddDeposit}/>}
     </>
   );
 }

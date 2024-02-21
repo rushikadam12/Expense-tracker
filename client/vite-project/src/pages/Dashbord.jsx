@@ -7,9 +7,8 @@ import CustomPiechart from "../components/CustomPiechart";
 import MixedBarchart from "../components/MixedBarchart";
 import ExpenseTable from "../components/ExpenseTable";
 import axiosInstance from "../hooks/axiosInstances";
-
 import { useQuery } from "@tanstack/react-query";
- const Dashbord = () => {
+const Dashbord = () => {
   const Fetch = async () => {
     try {
       const resp = await axiosInstance.get("/Expenses/date/desc");
@@ -26,11 +25,10 @@ import { useQuery } from "@tanstack/react-query";
     queryKey: ["UserData"],
   });
 
-  if(isLoading) return <h1 className="text-center text-2xl">Loading......</h1>
+  if (isLoading) return <h1 className="text-center text-2xl">Loading......</h1>;
 
   if (error) {
     console.log(error);
-    
   }
 
   return (
@@ -41,17 +39,40 @@ import { useQuery } from "@tanstack/react-query";
             Dashboard
           </p>
         </label>
-        <div className="w-full h-fit flex justify-between flex-col md:flex-row lg:flex-row gap-4 items-center md:flex-wrap lg:gap-2 md:gap-2">
-          {dlist.map((item, index) => {
-            return (
-              <DashboardCard
-                key={index}
-                Color={item.IconColor}
-                Icon={item.Icons}
-                iconsColor={item.Color}
-              />
-            );
-          })}
+        <div className="w-full h-fit flex justify-between flex-col md:flex-row lg:flex-row gap-4 items-center md:flex-wrap lg:gap-2 md:gap-2 px-5 md:px-1 lg:px-1">
+          <DashboardCard
+            key={dlist[0]}
+            Color={dlist[0].IconColor}
+            Icon={dlist[0].Icons}
+            iconsColor={dlist[0].Color}
+            info={"₹" + data.totalExpense}
+            text={"amount spend"}
+          />
+
+          <DashboardCard
+            Color={dlist[1].IconColor}
+            Icon={dlist[1].Icons}
+            iconsColor={dlist[1].Color}
+            // Userbuget
+            info={"₹" + data?.Userbudget.budget}
+            text={"amount spend"}
+          />
+
+          <DashboardCard
+            Color={dlist[2].IconColor}
+            Icon={dlist[2].Icons}
+            iconsColor={dlist[2].Color}
+            info={data?.data?.length}
+            text={"expense count"}
+          />
+
+          <DashboardCard
+            Color={dlist[3].IconColor}
+            Icon={dlist[3].Icons}
+            iconsColor={dlist[3].Color}
+            info={"₹" + data?.data[0]?.amount}
+            text={"recent spend"}
+          />
         </div>
         <div className="w-full h-full md:py-10 py-5 flex flex-col md:flex-row lg:flex-row gap-2">
           <div className="md:max-w-[50%] md:min-w-[50%] w-full self-center  bg-slate-800 rounded-xl py-2">
@@ -78,7 +99,3 @@ import { useQuery } from "@tanstack/react-query";
 };
 
 export default Dashbord;
-
-// Icons:HiCurrencyRupee,
-// IconColor:'bg-green-300',
-// Color:'green'

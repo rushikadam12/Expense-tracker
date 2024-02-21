@@ -16,7 +16,7 @@ export default {
   
   },
   daisyui: {
-    themes: ["light", "dark", "cupcake","forest","dracula","synthwave","luxury","night"],
+    themes: ["light", "dark", "cupcake","forest","dracula","synthwave","luxury","night","sunset"],
   },
   plugins: [daisyui,tailwindcssanimated],
 }

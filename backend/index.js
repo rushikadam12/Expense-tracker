@@ -14,6 +14,7 @@ const deleteExpense = require("./app/Expense/deleteExpense.js");
 const rateLimit = require("express-rate-limit");
 const cookieParser = require("cookie-parser");
 const Logout = require("./app/login/Logout.js");
+const addDeposit=require("./app/Expense/addDeposit.js")
 
 app = express();
 app.set('trust proxy', 1);
@@ -24,13 +25,16 @@ app.use(
   cors({
     origin: "https://expense-tracker-rose-xi.vercel.app",
     credentials: true,
+    // origin: "http://localhost:5173",
+    // credentials: true
   })
 );
+// https://expense-tracker-rose-xi.vercel.app
 
 const limiter = rateLimit({
   //to limit the api request from user
   windowMs: 60 * 1000, // 1 minute
-  max: 50, // max requests per minute
+  max: 40, // max requests per minute
 });
 app.use(limiter);
 
@@ -42,6 +46,7 @@ app.use("/api/AddExpense", verifyToken, addExpense);
 app.use("/api/Expenses", verifyToken, ByDate);
 app.use("/api", verifyToken, UserData);
 app.use("/api/Delete", verifyToken, deleteExpense);
+app.use("/api/addDeposit",verifyToken,addDeposit);
 
 connectDb().then(() => {
   app.listen(process.env.PORT || 3000, () => {

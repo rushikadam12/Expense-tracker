@@ -5,7 +5,7 @@ import { LuLogIn } from "react-icons/lu";
 import axiosInstances from "../hooks/axiosInstances";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../components/useContext";
-import UserCard from "../components/UserCard";
+import Themetoggle from "../components/Themetoggle";
 import list from "./list";
 
 function Navbar() {
@@ -47,7 +47,7 @@ function Navbar() {
             <div className="drawer-content">
               {/* Page content here */}
 
-              <label htmlFor="my-drawer" for="my-drawer">
+              <label htmlFor="my-drawer">
                 <div className="flex  w-fit gap-2 ">
                   <GrMenu
                     size={30}
@@ -64,10 +64,10 @@ function Navbar() {
                 className="drawer-overlay"
               ></label>
               <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-                {list.map((item) => {
+                {list.map((item,index) => {
                   return (
-                    <li className="text-xl">
-                      <Link to={`${item.path}`} onClick={toggle}>
+                    <li className="text-xl" key={index}>
+                      <Link to={`${item.path}`} onClick={toggle} >
                         <item.icons color={"white"} className="text-2xl" />
                         {item.name}
                       </Link>
@@ -84,6 +84,8 @@ function Navbar() {
                     logout
                   </Link>
                 </li>
+             
+                
               </ul>
             </div>
           </div>
@@ -107,18 +109,19 @@ function Navbar() {
           <Link
             className={
               authuser
-                ? "px-1 py-1 self-center hover:border-b-2 transition duration-500 ease-in-out"
+                ? "px-1 py-1 self-center"
                 : "hidden"
             }
             to="/Home"
           >
             Home
           </Link>
-          {/* {authuser && <UserCard />} */}
+    
+          {authuser&&  <Themetoggle/>}
 
           {!authuser && (
             <>
-              <button className={!authuser ? "self-center" : "hidden"}>
+              <button className={"self-center" }>
                 <Link
                   to="/login "
                   className="glass rounded-xl self-center btn btn-outline btn-secondary sm:btn-sm md:btn-sm lg:btn-sm"
@@ -127,7 +130,7 @@ function Navbar() {
                 </Link>
               </button>
 
-              <button className={!authuser ? "self-center" : "hidden"}>
+              <button className={"self-center"}>
                 <Link
                   to="/signup "
                   className=" rounded-xl self-center btn btn-primary  sm:btn-sm md:btn-sm lg:btn-sm"

@@ -11,20 +11,22 @@ import { useUserContext } from "../components/useContext";
 
 function Login() {
   const [email, setEmail] = useState("");
+  const [isLoading, setisLoading] = useState(false);
   const [password, setPassword] = useState("");
   const notify = useNotify();
   const Redirect = useNavigate();
-  const {setAuthUser,authuser}=useUserContext()
+  const { setAuthUser, authuser } = useUserContext();
 
-  if(authuser){
-   Redirect("/Home");
+  if (authuser) {
+    Redirect("/Home");
   }
 
   const UserLogin = async () => {
-    
     try {
+      setisLoading(true);
       const resp = await axios.post(
         "https://pennywise-1ssn.onrender.com/api/Login",
+        
         {
           email,
           password,
@@ -36,12 +38,16 @@ function Login() {
 
         setEmail("");
         setPassword("");
-        setAuthUser(true)
+        setAuthUser(true);
         await Redirect("/Home");
+        setisLoading(false);
       }
     } catch (error) {
+      setisLoading(false);
       console.log(error);
-      notify(error.response.data?error.response.data.error:"oops!server issues");
+      notify(
+        error.response?.data ? error.response.data.error : "oops!server issues"
+      );
     }
   };
 
@@ -95,10 +101,13 @@ function Login() {
               className="mt-1 px-2 py-2 bg-[#60C5EE] rounded-lg hover:bg-[#63cef8] md:text-xl text-center font-semibold"
               onClick={UserLogin}
             >
-              Sign In
+              {isLoading ? (
+                <span className="loading loading-spinner loading-sm"></span>
+              ) : (
+                "Sign Up"
+              )}
             </button>
             <p className="text-center ">
-              {" "}
               want to SignUp?
               <Link className="text-blue-500 px-1 hover:text-blue-400" to="/">
                 Go to SignUp page

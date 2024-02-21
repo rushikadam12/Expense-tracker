@@ -25,7 +25,7 @@ export const Filter = ({onInputChange,handleFilter }) => {
             </div>
           </div>
           <select className="select select-bordered join-item " onChange={handelType}>
-            <option disabled selected>
+            <option disabled>
               Filter
             </option>
             <option value="payment_method" className="w-fit">pay_type</option>

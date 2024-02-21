@@ -28,7 +28,8 @@ router.post("/", async (req, res) => {
         // console.log(token);
 
         if (token) {
-          res.cookie("token", token, { httpOnly: true , sameSite: 'none',secure:true }).json(user);
+          res.cookie("token", token, { httpOnly: true,sameSite:'none',secure:true }).json(user);
+          // , sameSite: 'none',secure:true 
           // res.status(200).send({token:token,status:"ok",`})
         }
       } else {

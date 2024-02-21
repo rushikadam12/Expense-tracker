@@ -26,7 +26,6 @@ const Expense = ({
   };
 
   const DeleteExp = async (_id) => {
-    
     try {
       const resp = await axiosInstance.delete("/Delete", {
         data: {_id},
@@ -44,7 +43,7 @@ const Expense = ({
   };
 
   const { mutate } = useMutation({
-    mutationFn:()=>DeleteExp(_id,user_id),
+    mutationFn:()=>DeleteExp(_id),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["UserData"] });
       await queryClient.invalidateQueries({ queryKey: ["Users"] });

@@ -15,7 +15,7 @@ function Home() {
     try {
       const resp = await axiosInstance.get("/Expenses/date/desc");
       if (resp.status === 200) {
-        console.log(await resp.data);
+        // console.log(await resp.data);
         return await resp.data;
       }
     } catch (error) {
@@ -47,7 +47,7 @@ function Home() {
     return (
       <>
         <div className="w-full min-h-[100dvh] flex justify-center items-center">
-          <h1 className="text-slate-200 text-2xl">Almost done....</h1>
+        <span className="loading loading-bars loading-lg"></span>
         </div>
       </>
     )
@@ -83,9 +83,9 @@ function Home() {
                     return true;
                   }
                 })
-                .map((expense) => (
+                .map((expense,index) => (
                   <Expense
-                    key={expense.id}
+                    key={index}
                     _id={expense._id}
                     user_id={expense.user_id}
                     date={expense.date}

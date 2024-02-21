@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../../components/useContext";
 function NewUser() {
   const Navigate = useNavigate();
-  const {authuser}=useUserContext()
+  const { authuser } = useUserContext();
 
-  useEffect(()=>{
-    const checkUser=()=>{
-    authuser&&Navigate('/Home')
-    }
+  useEffect(() => {
+    const checkUser = () => {
+      authuser && Navigate("/Home");
+    };
     checkUser();
-  },[])
+  }, []);
   return (
     <>
       <div className="w-full h-screen">
@@ -30,10 +30,10 @@ function NewUser() {
             <p className="md:text-[1.5rem] text-xl text-center  px-2 py-2">
               PennyWise analyzes your spending and automatically perfect amount
               every day so you don't have to worry about it
-            </p>
+            </p>ḍ
           </div>
           <div className="min-w-[50%] flex items-center justify-center ">
-            <img src={img[1].url} width={433} />
+            <img src={img[1].url} width={433} loading="lazy" />
           </div>
         </section>
         <p className="px-5 py-5 w-full self-cen flex items-center justify-center ">
