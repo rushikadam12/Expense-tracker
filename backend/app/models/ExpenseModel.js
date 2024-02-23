@@ -8,6 +8,8 @@ const expenseSchema = new mongoose.Schema({
     required: true,
   },
   date: { type: Date, required: true },
+  month:{type:Number,require:true},
+  year:{type:Number,require:true},
   amount: { type: Number, required: true },
   category: { type: String, required: true },
   description: { type: String },
@@ -18,4 +20,4 @@ const expenseSchema = new mongoose.Schema({
 const Expense = mongoose.model("Expense", expenseSchema);
 
 // Export the models for use in other parts of your application
-module.exports = Expense
+module.exports = Expense;

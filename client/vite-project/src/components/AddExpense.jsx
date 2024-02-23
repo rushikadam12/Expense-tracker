@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import axiosInstance from "../hooks/axiosInstances";
-import { useQueryClient } from '@tanstack/react-query';
+import { useQueryClient } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
 import useNotify from "../hooks/useNotify";
+
 const AddExpense = (props) => {
   const queryClient = useQueryClient();
   const [handelOption, sethandelOption] = useState("cash");
-  const notify=useNotify();
+  const notify = useNotify();
+
   const [AddExp, setAddExp] = useState({
     amount: 0,
     category: "",
@@ -30,30 +32,28 @@ const AddExpense = (props) => {
       }
     } catch (error) {
       console.log(error);
-      notify(error.response.data.error?error.response.data.error:error)
-      
+      notify(error.response?.data?.error);
     }
   };
-  const handelSelect=(e)=>{
-    const value=e.target.value;
+  const handelSelect = (e) => {
+    const value = e.target.value;
     sethandelOption(value);
-    setAddExp({...AddExp,payment_method:value})
-  }
+    setAddExp({ ...AddExp, payment_method: value });
+  };
 
-  const { mutate, isLoading} = useMutation({
-    mutationFn:AddUserExpense,
-    onSuccess:async()=>{
-      await queryClient.invalidateQueries({ queryKey: ["UserData"] })
-      await queryClient.invalidateQueries({ queryKey: ["Users"] })
+  const { mutate, isLoading } = useMutation({
+    mutationFn: AddUserExpense,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["UserData"] });
+      await queryClient.invalidateQueries({ queryKey: ["Users"] });
       //always use queryclient=useQueryClient and pass the key by specifying queryKey:["catch"]
-      console.log("Mutation is successful")
+      console.log("Mutation is successful");
     },
-    onError:()=>{
-      console.log("!oops server issue")
-      notify("!Oops server issue")
-    }
-    
-   
+    onError: () => {
+      console.log("!oops server issue");
+      notify("!Oops server issue");
+    },
+
     // onError: (error) => {
     //   console.log(error);
     // },
@@ -102,9 +102,7 @@ const AddExpense = (props) => {
               <textarea
                 className="w-[100%] textarea textarea-secondary self-start"
                 placeholder="Description"
-                
                 onChange={(e) => {
-                 
                   setAddExp({ ...AddExp, description: e.target.value });
                 }}
               ></textarea>
@@ -112,35 +110,28 @@ const AddExpense = (props) => {
             <div className="w-full px-10 py-1 flex-justify-start items-start">
               <p className="px-2 py-2 font-medium">Select payment method:</p>
               <select
-                
-                onChange={
-                  handelSelect
-                }
+                onChange={handelSelect}
                 className="px-2 py-2  rounded-lg outline-none"
                 value={handelOption}
               >
-                <option
-                  value="cash"
-                  className="px-1 py-1 "
-                >
+                <option value="cash" className="px-1 py-1 ">
                   Cash
                 </option>
-                <option
-                  value="card"
-                  className="px-2 py-2 "
-                >
+                <option value="card" className="px-2 py-2 ">
                   Card
                 </option>
-                <option
-                  value="Online"
-                  className="px-2 py-2 "
-                >
+                <option value="Online" className="px-2 py-2 ">
                   Online UPI
                 </option>
               </select>
             </div>
             <p className="w-full px-2 py-5 flex ">
-              <button className="btn m-auto px-10" onClick={()=>{mutate()}}>
+              <button
+                className="btn m-auto px-10"
+                onClick={() => {
+                  mutate();
+                }}
+              >
                 +Add
               </button>
             </p>

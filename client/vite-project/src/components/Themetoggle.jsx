@@ -1,6 +1,11 @@
 import React from "react";
+import useLocalstorage from "../hooks/useLocalstorage";
 
 const Themetoggle = () => {
+  const [theme,setlocalTheme]=useLocalstorage();
+  const handleToggle = () => {
+    setlocalTheme(theme === 'dracula' ? 'synthwave' : 'dracula');
+  };
   return (
     <>
       <label className="swap swap-rotate">
@@ -8,7 +13,9 @@ const Themetoggle = () => {
         <input
           type="checkbox"
           className="theme-controller"
-          value="synthwave"
+          value={theme}
+          onChange={handleToggle}
+          checked={theme==="dracula"?false:true}
         />
 
         {/* sun icon */}

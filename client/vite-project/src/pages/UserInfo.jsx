@@ -110,7 +110,7 @@ function UserInfo({ totalSpend, expenseCount }) {
               <div className="stat ">
                 <div className="stat-title">Current balance</div>
                 <div className="stat-value countdown">
-                  ₹{data?.budget ? data?.budget : "no expense"}
+                  ₹{data?.budget ? data?.budget : 0}
                 </div>
                 <div className="stat-actions gap-5 self-center">
                   <button className="btn btn-sm" onClick={()=>{setaddDeposit(!adddeposit)}}>deposit</button>

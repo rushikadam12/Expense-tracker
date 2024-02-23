@@ -19,7 +19,7 @@ const AnalyticsComp = ({data}) => {
     <ResponsiveContainer width={'99%'} height={500}>
       <AreaChart data={data} width={400} height={500}>
   
-        <XAxis dataKey="date"     tickFormatter={(date) => new Date(date).toLocaleDateString('en-UB')}/>
+        <XAxis dataKey="date"  tickFormatter={(date) => new Date(date).toLocaleDateString('en-UB')} label={false}/>
         <YAxis/>
         <Tooltip/>
         <Legend/>

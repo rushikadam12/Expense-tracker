@@ -43,6 +43,7 @@ function Signup() {
       setisLoading(true);
       const resp = await axios.post(
         "https://pennywise-1ssn.onrender.com/api/Register",
+        // https://pennywise-1ssn.onrender.com/api/Register
         {
           username: username,
           email: email,

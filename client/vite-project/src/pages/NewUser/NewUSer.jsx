@@ -30,7 +30,7 @@ function NewUser() {
             <p className="md:text-[1.5rem] text-xl text-center  px-2 py-2">
               PennyWise analyzes your spending and automatically perfect amount
               every day so you don't have to worry about it
-            </p>ḍ
+            </p>
           </div>
           <div className="min-w-[50%] flex items-center justify-center ">
             <img src={img[1].url} width={433} loading="lazy" />

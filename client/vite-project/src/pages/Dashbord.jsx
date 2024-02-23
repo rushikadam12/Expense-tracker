@@ -46,7 +46,7 @@ const Dashbord = () => {
             Icon={dlist[0].Icons}
             iconsColor={dlist[0].Color}
             info={"₹" + data.totalExpense}
-            text={"amount spend"}
+            text={"total spend"}
           />
 
           <DashboardCard
@@ -55,7 +55,7 @@ const Dashbord = () => {
             iconsColor={dlist[1].Color}
             // Userbuget
             info={"₹" + data?.Userbudget.budget}
-            text={"amount spend"}
+            text={"current amount"}
           />
 
           <DashboardCard

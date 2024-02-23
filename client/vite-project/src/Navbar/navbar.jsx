@@ -8,9 +8,11 @@ import { useUserContext } from "../components/useContext";
 import Themetoggle from "../components/Themetoggle";
 import list from "./list";
 
+
 function Navbar() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const toggle = () => setDrawerOpen(!isDrawerOpen);
+  
   const { setAuthUser, authuser } = useUserContext();
   const Redirect = useNavigate();
   const LogOut = async () => {
@@ -64,10 +66,10 @@ function Navbar() {
                 className="drawer-overlay"
               ></label>
               <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
-                {list.map((item,index) => {
+                {list.map((item, index) => {
                   return (
                     <li className="text-xl" key={index}>
-                      <Link to={`${item.path}`} onClick={toggle} >
+                      <Link to={`${item.path}`} onClick={toggle}>
                         <item.icons color={"white"} className="text-2xl" />
                         {item.name}
                       </Link>
@@ -84,8 +86,6 @@ function Navbar() {
                     logout
                   </Link>
                 </li>
-             
-                
               </ul>
             </div>
           </div>
@@ -96,7 +96,7 @@ function Navbar() {
             className="w-fit h-fit m-auto transition duration-1000 self-center"
             to={authuser ? "/Home" : "/"}
           >
-            <p className="w-full px-1 py-1  md:text-xl text-[1rem] text-nowrap whitespace-nowrap">
+            <p className="px-1 py-1  md:text-xl lg:text-xl text-[1rem] text-nowrap whitespace-nowrap">
               𝓟𝓮𝓷𝓷𝔂𝓦𝓲𝓼𝓮✍
             </p>
           </Link>
@@ -107,21 +107,17 @@ function Navbar() {
           }
         >
           <Link
-            className={
-              authuser
-                ? "px-1 py-1 self-center"
-                : "hidden"
-            }
+            className={authuser ? "px-1 py-1 self-center" : "hidden"}
             to="/Home"
           >
             Home
           </Link>
-    
-          {authuser&&  <Themetoggle/>}
+
+          {authuser && <Themetoggle />}
 
           {!authuser && (
             <>
-              <button className={"self-center" }>
+              <button className={"self-center"}>
                 <Link
                   to="/login "
                   className="glass rounded-xl self-center btn btn-outline btn-secondary sm:btn-sm md:btn-sm lg:btn-sm"
