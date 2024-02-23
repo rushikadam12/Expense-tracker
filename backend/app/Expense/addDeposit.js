@@ -10,12 +10,11 @@ router.patch("/", async (req, res) => {
   try {
     const _id = req.userId;
 
-    const userData = await User.findOne({_id});
+    const userData = await User.findOne({ _id });
     let amount = parseInt(userData.budget) + parseInt(newamount);
 
     const result = await User.updateOne({ _id }, { $set: { budget: amount } });
     if (result) {
-    
       return res.status(200).send({ result });
     }
     return res.status(404).send({ msg: "User not found" });
