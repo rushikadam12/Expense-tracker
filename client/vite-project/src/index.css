@@ -71,5 +71,5 @@ html {
   }
 
   .text-autoadapt {
-    font-size: clamp(12px, 4vw, 1.8rem); /* Adjust the minimum, viewport-based, and maximum font sizes as needed */
+    font-size: clamp(1.8rem, 4vw, 1.8rem); /* Adjust the minimum, viewport-based, and maximum font sizes as needed */
   }
