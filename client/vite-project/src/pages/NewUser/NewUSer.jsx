@@ -15,14 +15,14 @@ function NewUser() {
   }, []);
   return (
     <>
-      <div className="w-full h-screen">
-        <section className="w-full md:min-h-[100dvh] lg:min-h-[100dvh] flex justify-center items-center">
+      <div className="w-full h-screen bg-base-100" >
+        <section className="w-full md:min-h-[100dvh] lg:min-h-[100dvh] flex justify-center items-center gap-4">
           <p className="text-white font-semibold md:text-[5rem] text-[2.5rem] break-words text-center animate-fade-down px-2 py-2">
             Track and Control Your Expenses Effortlessly
           </p>
           <p></p>
         </section>
-        <section className="min-w-full min-h-[100dvh] flex justify-center items-center m-auto md:flex-row flex-col">
+        <section className="min-w-full h-full flex justify-center items-center m-auto md:flex-row flex-col bg-base-100">
           <div className="md:w-[40%] px-2 py-2  ">
             <p className="md:text-[3.5rem] text-[2rem] text-center  px-2 py-2 font-semibold">
               Save money without thinking about it
