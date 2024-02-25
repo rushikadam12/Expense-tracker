@@ -28,7 +28,7 @@ const Expense = ({
   const DeleteExp = async (_id) => {
     try {
       const resp = await axiosInstance.delete("/Delete", {
-        data: {_id},
+        data: { _id },
       });
       if (resp.status == 200) {
         notify("Expense is deleted");
@@ -42,8 +42,8 @@ const Expense = ({
     }
   };
 
-  const { mutate } = useMutation({
-    mutationFn:()=>DeleteExp(_id),
+  const { mutate} = useMutation({
+    mutationFn: () => DeleteExp(_id),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["UserData"] });
       await queryClient.invalidateQueries({ queryKey: ["Users"] });
@@ -113,7 +113,9 @@ const Expense = ({
                   <MdOutlineDelete
                     size={30}
                     className="m-auto md:self-center ml-auto hover:text-red-500 transition duration-300"
-                    onClick={()=>{mutate()}}
+                    onClick={() => {
+                      mutate();
+                    }}
                   />
                 </button>
               </div>

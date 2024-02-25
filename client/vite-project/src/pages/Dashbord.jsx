@@ -13,10 +13,11 @@ const Dashbord = () => {
     try {
       const resp = await axiosInstance.get("/Expenses/date/desc");
       if (resp.status === 200) {
-        console.log(await resp.data);
+        // console.log(await resp.data);
         return await resp.data;
       }
     } catch (error) {
+      console.log(error)
       throw error;
     }
   };

@@ -16,7 +16,7 @@ function NewUser() {
   return (
     <>
       <div className="w-full h-screen">
-        <section className="w-full min-h-[100dvh] flex justify-center items-center">
+        <section className="w-full md:min-h-[100dvh] lg:min-h-[100dvh] flex justify-center items-center">
           <p className="text-white font-semibold md:text-[5rem] text-[2.5rem] break-words text-center animate-fade-down px-2 py-2">
             Track and Control Your Expenses Effortlessly
           </p>

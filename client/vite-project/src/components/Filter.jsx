@@ -13,7 +13,7 @@ export const Filter = ({onInputChange,handleFilter }) => {
  
   return (
     <>
-      <div className=" p-[2rem] 5rem rounded-xl w-full ">
+      <div className=" lg:p-[2rem] md:p-[2rem] p-[1rem]  rounded-xl w-full ">
         <div className="join w-[100%]">
           <div className="w-full">
             <div className="w-full">
@@ -24,7 +24,7 @@ export const Filter = ({onInputChange,handleFilter }) => {
               />
             </div>
           </div>
-          <select className="select select-bordered join-item " onChange={handelType}>
+          <select className="select select-bordered join-item md:px-[0.8rem] lg:px-[0.8rem] px-[0.5rem]" onChange={handelType}>
             <option disabled>
               Filter
             </option>

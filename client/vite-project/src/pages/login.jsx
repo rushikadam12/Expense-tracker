@@ -26,6 +26,7 @@ function Login() {
       setisLoading(true);
       const resp = await axios.post(
         "https://pennywise-1ssn.onrender.com/api/Login",
+        // 
         {
           email,
           password,
@@ -68,15 +69,17 @@ function Login() {
             </p>
             <label className="flex px-1 gap-1 md:text-lg">
               <MdEmail size={24} />
-              Username:
+              
+              Useremail:
             </label>
             <input
               className="px-2 py-1 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent font-semibold "
               type="text"
-              required
+              
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
+              required
             />
             <label className="flex px-1 gap-1 md:text-lg">
               <RiLockPasswordFill size={24} />
@@ -97,7 +100,7 @@ function Login() {
             </p>
 
             <button
-              className="mt-1 px-2 py-2 bg-[#60C5EE] rounded-lg hover:bg-[#63cef8] md:text-xl text-center font-semibold"
+              className="mt-1 px-2 py-2 bg-[#60C5EE] rounded-lg hover:bg-[#63cef8] md:text-xl text-slate-200 text-center font-semibold"
               onClick={UserLogin}
             >
               {isLoading ? (

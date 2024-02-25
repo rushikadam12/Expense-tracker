@@ -8,11 +8,10 @@ import { useUserContext } from "../components/useContext";
 import Themetoggle from "../components/Themetoggle";
 import list from "./list";
 
-
 function Navbar() {
   const [isDrawerOpen, setDrawerOpen] = useState(false);
   const toggle = () => setDrawerOpen(!isDrawerOpen);
-  
+
   const { setAuthUser, authuser } = useUserContext();
   const Redirect = useNavigate();
   const LogOut = async () => {
@@ -96,9 +95,9 @@ function Navbar() {
             className="w-fit h-fit m-auto transition duration-1000 self-center"
             to={authuser ? "/Home" : "/"}
           >
-            <p className="px-1 py-1  md:text-xl lg:text-xl text-[1rem] text-nowrap whitespace-nowrap">
-              𝓟𝓮𝓷𝓷𝔂𝓦𝓲𝓼𝓮✍
-            </p>
+            <span className="px-1 md:text-xl lg:text-xl text-lg text-nowrap whitespace-nowrap">
+              קэииýωเรэ💰
+            </span>
           </Link>
         </div>
         <div

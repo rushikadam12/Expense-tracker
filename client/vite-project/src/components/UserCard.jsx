@@ -1,5 +1,4 @@
 import React from "react";
-import Avatar from "./Avatar";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { CiLogout } from "react-icons/ci";
@@ -26,9 +25,9 @@ const UserCard = () => {
       console.log(error);
     }
   };
-  const handelBlur=()=>{
-    setDrawerOpen(false)
-  }
+  // const handelBlur=()=>{
+  //   setDrawerOpen(false)
+  // }
   return (
     <>
       <details className="dropdown dropdown-end" open={isDrawerOpen}>
@@ -65,45 +64,3 @@ const UserCard = () => {
 
 export default UserCard;
 
-/*
-
-      {authuser?(<div
-          className={
-            "w-full flex justify-end items-end md:gap-[1rem] gap-[0.5rem] md:text-xl text-sm px-2"
-          }
-        >
-          <Link
-            className={
-              authuser
-                ? "px-1 py-1 self-center hover:border-b-2 transition duration-500 ease-in-out"
-                : "hidden"
-            }
-            to="/Home"
-          >
-            Home
-          </Link>
-        </div>):
-        (<div
-          className={
-            "w-full flex justify-end items-end md:gap-[1rem] gap-[0.5rem] md:text-xl text-sm px-2"
-          }
-        >
-          <button className={!authuser ? "self-center" : "hidden"}>
-            <Link
-              to="/login "
-              className="glass rounded-xl self-center btn btn-outline btn-secondary sm:btn-sm md:btn-sm lg:btn-sm"
-            >
-              Login
-            </Link>
-          </button>
-          
-          <button className={!authuser ? "self-center" : "hidden"}>
-            <Link
-              to="/signup "
-              className=" rounded-xl self-center btn btn-primary  sm:btn-sm md:btn-sm lg:btn-sm"
-            >
-              SignUp
-            </Link>
-          </button>
-        </div>)}
- */

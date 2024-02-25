@@ -10,7 +10,7 @@ function UserInfo({ totalSpend, expenseCount }) {
   const notify = useNotify();
   const Redirect = useNavigate();
   const [addExpense, setaddExpense] = useState(false);
-  const [adddeposit,setaddDeposit]=useState(false)
+  const [adddeposit, setaddDeposit] = useState(false);
   const User = async () => {
     try {
       const response = await axiosInstance.get("User");
@@ -50,7 +50,9 @@ function UserInfo({ totalSpend, expenseCount }) {
   if (isLoading) {
     return (
       <>
-        <h1 className="text-2xl text-center self-center"><span className="loading loading-ring loading-lg"></span></h1>
+        <h1 className="text-2xl text-center self-center">
+          <span className="loading loading-ring loading-lg"></span>
+        </h1>
       </>
     );
   }
@@ -58,18 +60,20 @@ function UserInfo({ totalSpend, expenseCount }) {
   return (
     <>
       <div className="glass parse w-full h-full z-index-[2] z-0 px-2 py-2 border-2 rounded-lg animate-fade-down">
+      {/* <div className="w-full flex items-end justify-end"><p>asdasd</p></div> */}
         <div className="avatar flex justify-center items-center px-2 py-2 ">
           <div className="avatar placeholder ring ring-primary rounded-full">
             <div className="bg-neutral text-neutral-content rounded-full w-24">
-              <span className="text-3xl text-wrap text-center truncate">{data?.username}</span>
+              <span className="text-3xl text-wrap text-center truncate">
+                {data?.username}
+              </span>
             </div>
           </div>
         </div>
-
-        <div className="w-full flex flex-col items-center justify-center px-2 py-5 gap-2 ">
-          {/* <p className="px-1 py-1 text-xl font-semibold">{data?.username}</p> */}
-          <div className="p-2 text-slate-800 text-xl bg-slate-100 rounded-xl self-center flex gap-1 font-semibold">
        
+        <div className="w-full flex flex-col items-center justify-center px-2 py-5 gap-2 ">
+          
+          <div className="p-2 text-slate-800 text-xl bg-slate-100 rounded-xl self-center flex gap-1 font-semibold truncate">
             Allowances
             <GiCash className="self-center" /> ₹{TAmount(data, totalSpend)}
           </div>
@@ -95,25 +99,32 @@ function UserInfo({ totalSpend, expenseCount }) {
             ></progress>
             <label className="stat-actions">Expense bar</label>
           </div>
-          <div className=" flex flex-col justify-center item-center h-fit gap-10 px-1 py-5 text-center">
+          <div className=" flex flex-col justify-center item-center h-fit gap-10 px-1 py-5 text-center   ">
             <div className="stats bg-primary text-primary-content md:flex block ">
               <div
-                className="stat md:w-full w-fit place-items-center block"
+                className="stat md:w-full w-fit place-items-center block overflow-hidden"
                 style={{ placeSelf: "baseline" }}
               >
-                <div className="stat-title ">Amount spend</div>
-                <div className="stat-value ">
-                  ₹{totalSpend ? totalSpend : "no expense"}
+                <div className="stat-title  ">Amount spend</div>
+                <div className="stat-value whitespace-nowrap overflow-hidden truncate overflow-ellipsis text-autoadapt">
+                  ₹{totalSpend ? totalSpend: "no expense"}
                 </div>
               </div>
 
-              <div className="stat ">
+              <div className="stat  overflow-hidden ">
                 <div className="stat-title">Current balance</div>
-                <div className="stat-value countdown">
+                <div className="stat-value  px-1 text-autoadapt">
                   ₹{data?.budget ? data?.budget : 0}
                 </div>
                 <div className="stat-actions gap-5 self-center">
-                  <button className="btn btn-sm" onClick={()=>{setaddDeposit(!adddeposit)}}>deposit</button>
+                  <button
+                    className="btn btn-sm"
+                    onClick={() => {
+                      setaddDeposit(!adddeposit);
+                    }}
+                  >
+                    deposit
+                  </button>
                 </div>
               </div>
             </div>
@@ -133,7 +144,9 @@ function UserInfo({ totalSpend, expenseCount }) {
       {addExpense ? (
         <AddExpense addExpFun={setaddExpense} addExpVal={addExpense} />
       ) : null}
-      {adddeposit&&<Deposite adddeposit={adddeposit} setaddDeposit={setaddDeposit}/>}
+      {adddeposit && (
+        <Deposite adddeposit={adddeposit} setaddDeposit={setaddDeposit} />
+      )}
     </>
   );
 }

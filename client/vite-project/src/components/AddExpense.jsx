@@ -54,14 +54,12 @@ const AddExpense = (props) => {
       notify("!Oops server issue");
     },
 
-    // onError: (error) => {
-    //   console.log(error);
-    // },
+   
   });
 
   return (
     <>
-      <div className="m-auto md:glass md:px-2 md:py-2  px-5 py-5 glass z-[1000]  w-full min-h-[100vh] fixed md:top-1/2 top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-scroll">
+      <div className="m-auto md:glass md:px-2 md:py-2  px-5 py-5 glass z-[999]  w-full min-h-[100vh] fixed md:top-1/2 top-[50%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-scroll">
         <div className="w-full min-h-screen flex items-center justify-center flex-col h-fit">
           <div className=" md:bg-slate-800 glass w-[100%] md:w-[30%] min-h-[25rem] px-1 py-2 flex  flex-col rounded-xl animate-fade-up animate-once animate-ease-in animate-duration-500">
             <p className="self-end px-1 py-1 rounded-2xl bg-slate-800 absolute top-[5%] right-[5%] ">

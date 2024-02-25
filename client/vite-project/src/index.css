@@ -69,3 +69,7 @@ html {
     -webkit-appearance: none;
     margin: 0;
   }
+
+  .text-autoadapt {
+    font-size: clamp(12px, 4vw, 1.8rem); /* Adjust the minimum, viewport-based, and maximum font sizes as needed */
+  }
