@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import img from "../../assets/images";
+import img from "../assets/images";
 import { PiUserCircleFill } from "react-icons/pi";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { MdKey } from "react-icons/md";
-import useToast from "../../hooks/useToast";
+import useToast from "../hooks/useToast";
 const ForgetPassword = () => {
   const { token } = useParams();
   const [password, setPassword] = useState(null);

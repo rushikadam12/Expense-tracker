@@ -10,7 +10,7 @@ import Analytics from "./pages/Analytics";
 import Dashbord from "./pages/Dashbord";
 import Loader from "./components/Loader";
 import ResetPassword from "./pages/ResetPassword";
-import ForgetPassword from "./pages/NewUser/forgetPassword";
+import ForgetPassword from "./pages/ForgetPassword";
 
 function App() {
   return (
