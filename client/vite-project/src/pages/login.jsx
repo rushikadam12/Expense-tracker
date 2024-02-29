@@ -8,6 +8,7 @@ import useNotify from "../hooks/useNotify";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../components/useContext";
+import axiosInstance from "../hooks/axiosInstances";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -24,14 +25,13 @@ function Login() {
   const UserLogin = async () => {
     try {
       setisLoading(true);
-      const resp = await axios.post(
-        "https://pennywise-1ssn.onrender.com/api/Login",
-        // 
+      const resp = await axiosInstance.post(
+        "/Login",
+        //
         {
           email,
           password,
         },
-        { withCredentials: true }
       );
       if (resp.status === 200) {
         // console.log(resp.data.message)
@@ -69,13 +69,11 @@ function Login() {
             </p>
             <label className="flex px-1 gap-1 md:text-lg">
               <MdEmail size={24} />
-              
               Useremail:
             </label>
             <input
               className="px-2 py-1 border-b border-gray-200 focus:outline-none focus:border-blue-500 bg-transparent font-semibold "
               type="text"
-              
               onChange={(e) => {
                 setEmail(e.target.value);
               }}
@@ -94,7 +92,7 @@ function Login() {
               required
             />
             <p className="text-end">
-              <Link className="text-blue-500 px-1 hover:text-blue-400" to="/">
+              <Link className="text-blue-500 px-1 hover:text-blue-400" to="/resetpassword">
                 forgot password?
               </Link>
             </p>

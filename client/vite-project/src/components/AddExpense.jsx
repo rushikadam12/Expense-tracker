@@ -41,7 +41,7 @@ const AddExpense = (props) => {
     setAddExp({ ...AddExp, payment_method: value });
   };
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate} = useMutation({
     mutationFn: AddUserExpense,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ["UserData"] });

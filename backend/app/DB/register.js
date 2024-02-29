@@ -16,7 +16,17 @@ const userSchema=new mongoose.Schema({
     budget:{
         type:Number,
         required:true
+    },
+    token:{
+        type:String,
+        default:''
+    },
+    expiresAt:{
+        type:Date,
+        default:''
     }
+},{
+    timestamp:true
 })
 
 const User=mongoose.model('User',userSchema);

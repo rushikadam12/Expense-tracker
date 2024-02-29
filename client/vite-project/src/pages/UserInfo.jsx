@@ -6,11 +6,16 @@ import axiosInstance from "../hooks/axiosInstances";
 import AddExpense from "../components/AddExpense";
 import { GiCash } from "react-icons/gi";
 import Deposite from "../components/Deposite";
+import { FaRegEdit } from "react-icons/fa";
+import RestUserBudget from "../components/RestUserBudget";
+
 function UserInfo({ totalSpend, expenseCount }) {
   const notify = useNotify();
   const Redirect = useNavigate();
+
   const [addExpense, setaddExpense] = useState(false);
   const [adddeposit, setaddDeposit] = useState(false);
+  const [UserBudget, setuserBudget] = useState(false);
   const User = async () => {
     try {
       const response = await axiosInstance.get("User");
@@ -22,6 +27,7 @@ function UserInfo({ totalSpend, expenseCount }) {
       throw error;
     }
   };
+
   const TAmount = (data) => {
     if (!data || isNaN(data.budget) || isNaN(totalSpend) || totalSpend === 0) {
       return 0;
@@ -42,6 +48,7 @@ function UserInfo({ totalSpend, expenseCount }) {
     queryKey: ["Users"],
     queryFn: User,
   });
+
   if (isError) {
     notify(error.response.data.error);
     Redirect("/login");
@@ -60,7 +67,6 @@ function UserInfo({ totalSpend, expenseCount }) {
   return (
     <>
       <div className="glass parse w-full h-full z-index-[2] z-0 px-2 py-2 border-2 rounded-lg animate-fade-down">
-      {/* <div className="w-full flex items-end justify-end"><p>asdasd</p></div> */}
         <div className="avatar flex justify-center items-center px-2 py-2 ">
           <div className="avatar placeholder ring ring-primary rounded-full">
             <div className="bg-neutral text-neutral-content rounded-full w-24">
@@ -70,12 +76,19 @@ function UserInfo({ totalSpend, expenseCount }) {
             </div>
           </div>
         </div>
-       
+
         <div className="w-full flex flex-col items-center justify-center px-2 py-5 gap-2 ">
-          
           <div className="p-2 text-slate-800 text-xl bg-slate-100 rounded-xl self-center flex gap-1 font-semibold truncate">
             Allowances
-            <GiCash className="self-center" /> ₹{TAmount(data, totalSpend)}
+            <GiCash className="self-center" /> ₹{(data&&data.budget)}
+            <button
+              className="lg:hover:text-red-500 md:hover:text-red-500 "
+              onClick={() => {
+                setuserBudget(!UserBudget);
+              }}
+            >
+              <FaRegEdit />
+            </button>
           </div>
           <div className="w-full flex md:flex-row  items-center justify-center px-2 py-5 gap-2 ">
             <div className="stat place-items-center">
@@ -107,7 +120,7 @@ function UserInfo({ totalSpend, expenseCount }) {
               >
                 <div className="stat-title  ">Amount spend</div>
                 <div className="stat-value whitespace-nowrap overflow-hidden truncate overflow-ellipsis text-autoadapt">
-                  ₹{totalSpend ? totalSpend: "no expense"}
+                  ₹{totalSpend ? totalSpend : "no expense"}
                 </div>
               </div>
 
@@ -141,11 +154,14 @@ function UserInfo({ totalSpend, expenseCount }) {
           </div>
         </div>
       </div>
-      {addExpense ? (
+      {addExpense && (
         <AddExpense addExpFun={setaddExpense} addExpVal={addExpense} />
-      ) : null}
+      )}
       {adddeposit && (
         <Deposite adddeposit={adddeposit} setaddDeposit={setaddDeposit} />
+      )}
+      {UserBudget && (
+        <RestUserBudget UserBudget={UserBudget} setuserBudget={setuserBudget} />
       )}
     </>
   );

@@ -9,6 +9,9 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import Analytics from "./pages/Analytics";
 import Dashbord from "./pages/Dashbord";
 import Loader from "./components/Loader";
+import ResetPassword from "./pages/ResetPassword";
+import ForgetPassword from "./pages/NewUser/forgetPassword";
+
 function App() {
   return (
     <>
@@ -65,6 +68,8 @@ function App() {
             }
           />
           <Route path="/login" element={<Login />} />
+          <Route path="/resetpassword" element={<ResetPassword/>} />
+          <Route path="/forgetpassword/:token" element={<ForgetPassword/>} />
         </Routes>
       </Router>
     </>

@@ -4,7 +4,7 @@ const User = require("../DB/register.js");
 
 router.patch("/", async (req, res) => {
   const { newamount } = req.body;
-  if (!newamount) {
+  if (!newamount ||parseInt(newamount)<1 ) {
     return res.status(400).send({ msg: "pls fill all the field" });
   }
   try {
