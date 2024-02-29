@@ -5,7 +5,7 @@ const Hpass = require("../login/HashPass");
 router.post("/", async (req, res) => {
   try {
     const { token, password } = req.body;
-    
+    console.log({toke,password})
     if (!token) {
       return res.status(400).send({ msg: "This link has been expire" });
     }

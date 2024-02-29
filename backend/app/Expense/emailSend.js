@@ -39,7 +39,7 @@ const sendResetpassword = async (email, name, token) => {
       if (error) {
         console.log(error);
       } else {
-        console.log("Mail has been sent");
+        console.log(info);
       }
     });
   } catch (error) {

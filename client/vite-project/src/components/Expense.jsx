@@ -6,6 +6,7 @@ import { MdOutlineDelete } from "react-icons/md";
 import axiosInstance from "../hooks/axiosInstances";
 import { useQueryClient } from "@tanstack/react-query";
 import { useMutation } from "@tanstack/react-query";
+import useToast from "../hooks/useToast";
 const Expense = ({
   _id,
   user_id,
@@ -18,6 +19,7 @@ const Expense = ({
   const queryClient = useQueryClient();
   const [Loading, setLoading] = useState(true);
   const [UserDate, setUserDate] = useState(null);
+  const [toastSuccess,toastError]=useToast()
   const setDate = async () => {
     const newDate = new Date(date);
     const NewDate = await newDate.toISOString().slice(0, 10);
@@ -31,7 +33,7 @@ const Expense = ({
         data: { _id },
       });
       if (resp.status == 200) {
-        notify("Expense is deleted");
+        toastSuccess("Expense is deleted");
         console.log("expense is deleted");
       } else {
         throw new Error(resp.data.error);
