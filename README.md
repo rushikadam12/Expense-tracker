@@ -1,4 +1,5 @@
 **Project Name: PenndyWise**
+Happy browsing on [Website Name](https://expense-tracker-rose-xi.vercel.app/)! 🌐
 
 ## Overview:
 PenndyWise is a simple and intuitive expense tracking application designed to help individuals manage their finances efficiently. With PenndyWise, users can easily record their expenses, categorize them, set budgets, and visualize their spending patterns through insightful graphs and reports.
